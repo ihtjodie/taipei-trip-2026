@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>台北4日3之旅</title>
+    <title>台北4日3夜之旅</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -12,9 +12,9 @@
         .tab-btn.active { background-color: #1e3a8a; color: white; border-color: #1e3a8a; }
         .current-now { animation: pulseBorder 2s infinite; border: 3px solid #ef4444 !important; }
         @keyframes pulseBorder {
-            0+ { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
-            70+ { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
-            100+ { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
     </style>
 </head>
@@ -63,23 +63,26 @@
     <main class="max-w-md mx-auto px-4 py-5 md:max-w-2xl">
         
         <!-- Day Navigation Tabs (Sticky) -->
-        <div class="flex justify-between bg-white/90 backdrop-blur-md rounded-xl shadow-sm p-1.5 mb-6 border border-slate-200 sticky top-3 z-50">
-            <button onclick="switchDay(1)" id="btn-day1" class="tab-btn active flex-1 py-2.5 text-center text-sm font-bold rounded-lg border border-transparent transition-all">
+        <div class="flex justify-between bg-white/90 backdrop-blur-md rounded-xl shadow-sm p-1.5 mb-6 border border-slate-200 sticky top-3 z-50 overflow-x-auto gap-1">
+            <button onclick="switchTab('1')" id="btn-1" class="tab-btn active flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all whitespace-nowrap">
                 8/15 (六)<br><span class="text-xs font-normal opacity-80">Day 1</span>
             </button>
-            <button onclick="switchDay(2)" id="btn-day2" class="tab-btn flex-1 py-2.5 text-center text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50">
+            <button onclick="switchTab('2')" id="btn-2" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/16 (日)<br><span class="text-xs font-normal opacity-80">Day 2</span>
             </button>
-            <button onclick="switchDay(3)" id="btn-day3" class="tab-btn flex-1 py-2.5 text-center text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50">
+            <button onclick="switchTab('3')" id="btn-3" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/17 (一)<br><span class="text-xs font-normal opacity-80">Day 3</span>
             </button>
-            <button onclick="switchDay(4)" id="btn-day4" class="tab-btn flex-1 py-2.5 text-center text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50">
+            <button onclick="switchTab('4')" id="btn-4" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/18 (二)<br><span class="text-xs font-normal opacity-80">Day 4</span>
+            </button>
+            <button onclick="switchTab('souvenir')" id="btn-souvenir" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 whitespace-nowrap">
+                🎁 手信<br><span class="text-xs font-normal opacity-80">Souvenirs</span>
             </button>
         </div>
 
         <!-- ==================== DAY 1 ==================== -->
-        <div id="day1" class="day-content active space-y-5" data-date="2026-08-15">
+        <div id="tab-1" class="day-content active space-y-5" data-date="2026-08-15">
             <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1599824436794-df8861be5307?auto=format&fit=crop&w=600&q=80');"></div>
@@ -204,7 +207,7 @@
         </div>
 
         <!-- ==================== DAY 2 ==================== -->
-        <div id="day2" class="day-content space-y-5" data-date="2026-08-16">
+        <div id="tab-2" class="day-content space-y-5" data-date="2026-08-16">
             <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=600&q=80');"></div>
@@ -312,7 +315,7 @@
         </div>
 
         <!-- ==================== DAY 3 ==================== -->
-        <div id="day3" class="day-content space-y-5" data-date="2026-08-17">
+        <div id="tab-3" class="day-content space-y-5" data-date="2026-08-17">
             <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80');"></div>
@@ -420,7 +423,7 @@
         </div>
 
         <!-- ==================== DAY 4 ==================== -->
-        <div id="day4" class="day-content space-y-5" data-date="2026-08-18">
+        <div id="tab-4" class="day-content space-y-5" data-date="2026-08-18">
             <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80');"></div>
@@ -507,6 +510,96 @@
                 </div>
             </div>
         </div>
+
+        <!-- ==================== SOUVENIR TAB ==================== -->
+        <div id="tab-souvenir" class="day-content space-y-5">
+            <!-- Souvenir Banner -->
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-950/90 via-amber-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-amber-300 uppercase">Shopping List</span>
+                    <h2 class="text-base font-bold md:text-lg">台北必買手信清單 🛍️</h2>
+                </div>
+            </div>
+
+            <!-- Item 1: 樂沐糕餅舖 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">烘焙糕點</span>
+                            <button onclick="updateMap('樂沐糕餅舖')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">1. 樂沐糕餅舖 🥐</h3>
+                        <p class="text-sm text-slate-600 mt-1">法式頂級工藝烘焙，主打法式甜品、精緻法式塔類與奶油法式小點。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>法式千層派、奶油曲奇、精緻禮盒</div>
+                            <div>📌 <b>備註：</b>建議提前確認品項預訂或營業時間</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: 承繼 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">人氣甜點</span>
+                            <button onclick="updateMap('承繼 CHENG JI')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">2. 承繼 CHENG JI 焦糖起司蛋糕 🍰</h3>
+                        <p class="text-sm text-slate-600 mt-1">台北話題爆棚的焦糖起司蛋糕與肉桂捲，極具質感且外盒精美。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>-18°C 焦糖起司蛋糕、肉桂阿曼</div>
+                            <div>📌 <b>備註：</b>Day 4 已安排取貨，請務必提早於官網線上預訂！</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: 好丘bagel -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">在地特色</span>
+                            <button onclick="updateMap('好丘 信義店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">3. 好丘 Bagel 🥯</h3>
+                        <p class="text-sm text-slate-600 mt-1">台灣 Q 彈貝果天花板，融合台灣在地食材特色（如紅茶、地瓜、芋頭等）。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>厚醬貝果、台灣茶系列貝果、草莓乳酪</div>
+                            <div>📌 <b>地點：</b>四四南村信義店、松菸店或台北車站微風專櫃</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: 老天祿鴨舌 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">傳統滷味</span>
+                            <button onclick="updateMap('上海老天祿滷味')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">4. 老天祿鴨舌 🦆</h3>
+                        <p class="text-sm text-slate-600 mt-1">西門町數十年港星最愛老字號，中藥滷汁香濃入味，啃骨香氣十足。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>招牌鴨舌、鴨翅、脆腸、豆干</div>
+                            <div>📌 <b>提示：</b>可購買真空包裝方便外帶或回港享用</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </main>
 
     <!-- Bottom Notification Bar -->
@@ -528,14 +621,21 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        function switchDay(dayNumber) {
+        function switchTab(tabId) {
             document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+                if(!btn.id.includes('souvenir')) {
+                    btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+                }
             });
-            document.getElementById('day' + dayNumber).classList.add('active');
-            const activeBtn = document.getElementById('btn-day' + dayNumber);
+
+            const targetSection = document.getElementById('tab-' + tabId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            const activeBtn = document.getElementById('btn-' + tabId);
             if(activeBtn) {
                 activeBtn.classList.add('active');
                 activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
@@ -555,13 +655,11 @@
             document.getElementById('current-time-text').innerText = `目前時間: ${currentTimeStr}`;
             document.querySelectorAll('[data-start]').forEach(card => card.classList.remove('current-now'));
 
-            let matchedDayIndex = null;
             let matchedCard = null;
 
             const days = document.querySelectorAll('.day-content');
-            days.forEach((daySection, index) => {
+            days.forEach((daySection) => {
                 if (daySection.getAttribute('data-date') === currentDateStr) {
-                    matchedDayIndex = index + 1;
                     const cards = daySection.querySelectorAll('[data-start]');
                     cards.forEach(card => {
                         const start = card.getAttribute('data-start');
@@ -581,9 +679,8 @@
         function focusCurrentSlot() {
             const currentSlot = document.querySelector('.current-now');
             if (currentSlot) {
-                const parentDayId = currentSlot.parentElement.id;
-                const dayNumber = parentDayId.replace('day', '');
-                switchDay(dayNumber);
+                const parentTabId = currentSlot.parentElement.id.replace('tab-', '');
+                switchTab(parentTabId);
                 setTimeout(() => {
                     currentSlot.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, 200);
