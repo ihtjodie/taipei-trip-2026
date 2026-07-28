@@ -7,35 +7,37 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { cursor: wait !important; } /* Force annoying cursor everywhere */
+        * { cursor: wait !important; }
         .day-content { display: none; }
         .day-content.active { display: block; }
         .tab-btn.active { background-color: #1e3a8a; color: white; border-color: #1e3a8a; }
-        .current-now { animation: pulseBorder 0.2s infinite; border: 8px dashed #ef4444 !important; }
+        .current-now { animation: pulseBorder 1s infinite; border: 3px solid #ef4444 !important; }
         @keyframes pulseBorder {
-            0% { transform: rotate(1deg); }
-            50% { transform: rotate(-1deg); }
-            100% { transform: rotate(0deg); }
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
-        /* Make buttons dodge the user's cursor */
         .tab-btn:hover {
-            transform: translate(calc(Math.random() * 20px - 10px), calc(Math.random() * 20px - 10px));
+            transform: translate(calc(Math.random() * 16px - 8px), calc(Math.random() * 16px - 8px));
         }
-        body {
-            user-select: none; /* Prevent text selection */
-            filter: contrast(110%) brightness(95%);
-        }
+        body { user-select: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased pb-28">
 
-    <!-- 頂部封面 -->
+    <!-- 頂部封面 Banner -->
     <header class="relative bg-slate-900 text-white min-h-[260px] flex items-center justify-center p-6 text-center shadow-lg overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://images.unsplash.com/photo-1552993873-0dd1110e025f?q=80&w=1171&auto=format&fit=crop');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1552993873-0dd1110e025f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0');"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-slate-950/80 to-slate-950"></div>
         <div class="relative z-10 space-y-3">
-            <span class="text-xs font-bold tracking-widest text-red-500 uppercase bg-black/80 px-4 py-1.5 rounded-full">⚠️ 系統混亂模式中</span>
-            <h1 class="text-4xl md:text-5xl font-black tracking-wide text-slate-400 drop-shadow-md strike-through">台北微醺之旅</h1>
-            <p class="text-slate-500 text-sm font-light tracking-wider">請耐心嘗試點擊選單...</p>
+            <span class="text-sm font-bold tracking-widest text-amber-400 uppercase bg-amber-400/20 px-4 py-1.5 rounded-full backdrop-blur-sm">Taipei Getaway 2026</span>
+            <h1 class="text-4xl md:text-5xl font-black tracking-wide text-white drop-shadow-md">台北微醺之旅</h1>
+            <p class="text-slate-300 text-sm md:text-base font-light tracking-wider">優雅從容的 4 日 3 夜全景點散策</p>
+            <div class="pt-1">
+                <div class="inline-flex items-center gap-2 bg-white/10 px-4 py-1.5 rounded-full text-xs md:text-sm text-amber-200 border border-white/10 backdrop-blur-sm">
+                    <i class="fa-solid fa-hotel"></i> 飯店：台北凱撒大飯店
+                </div>
+            </div>
         </div>
     </header>
 
@@ -43,12 +45,13 @@
     <section class="max-w-md mx-auto mt-5 px-4 md:max-w-2xl">
         <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100">
             <div class="bg-slate-900 px-4 py-3 text-sm font-bold text-white flex justify-between items-center">
-                <span><i class="fa-solid fa-map-location-dot text-amber-400 mr-1.5"></i> 地圖（回應緩慢）</span>
-                <span id="map-target" class="text-xs text-slate-500 font-normal">讀取中...</span>
+                <span><i class="fa-solid fa-map-location-dot text-amber-400 mr-1.5"></i> LINE 行程地圖預覽</span>
+                <span id="map-target" class="text-xs text-slate-300 font-normal">台北凱撒大飯店</span>
             </div>
             <div class="relative w-full h-56 bg-slate-200">
-                <iframe id="google-map" class="absolute top-0 left-0 w-full h-full border-0 pointer-events-none" 
-                    src="https://maps.google.com/maps?q=台北凱撒大飯店&t=&z=15&ie=UTF-8&iwloc=&output=embed">
+                <iframe id="google-map" class="absolute top-0 left-0 w-full h-full border-0" 
+                    src="https://maps.google.com/maps?q=台北凱撒大飯店&t=&z=15&ie=UTF-8&iwloc=&output=embed" 
+                    allowfullscreen>
                 </iframe>
             </div>
         </div>
@@ -56,8 +59,8 @@
 
     <!-- Interactive Toolbox -->
     <section class="max-w-md mx-auto mt-4 px-4 md:max-w-2xl flex">
-        <button onclick="annoyUser()" class="w-full bg-slate-300 text-slate-500 text-sm font-semibold py-3 px-4 rounded-xl shadow-inner flex items-center justify-center gap-2">
-            <i class="fa-solid fa-crosshairs"></i> 追蹤現在行程
+        <button onclick="focusCurrentSlot()" class="w-full bg-red-50 hover:bg-red-100 text-red-700 text-sm font-semibold py-3 px-4 rounded-xl border border-red-200 shadow-sm flex items-center justify-center gap-2 transition-all">
+            <i class="fa-solid fa-crosshairs text-red-500"></i> 追蹤現在行程
         </button>
     </section>
 
@@ -66,109 +69,601 @@
         
         <!-- Day Navigation Tabs -->
         <div class="flex justify-between bg-white/90 backdrop-blur-md rounded-xl shadow-sm p-1.5 mb-6 border border-slate-200 sticky top-3 z-50 overflow-x-auto gap-1">
-            <button onclick="trollSwitchTab('1')" id="btn-1" class="tab-btn active flex-1 py-2.5 px-1 text-center text-xs font-bold rounded-lg whitespace-nowrap">
+            <button onclick="switchTab('1')" id="btn-1" class="tab-btn active flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all whitespace-nowrap">
                 8/15 (六)<br><span class="text-xs font-normal opacity-80">Day 1</span>
             </button>
-            <button onclick="trollSwitchTab('2')" id="btn-2" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs font-bold rounded-lg text-slate-600 whitespace-nowrap">
+            <button onclick="switchTab('2')" id="btn-2" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/16 (日)<br><span class="text-xs font-normal opacity-80">Day 2</span>
             </button>
-            <button onclick="trollSwitchTab('3')" id="btn-3" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs font-bold rounded-lg text-slate-600 whitespace-nowrap">
+            <button onclick="switchTab('3')" id="btn-3" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/17 (一)<br><span class="text-xs font-normal opacity-80">Day 3</span>
             </button>
-            <button onclick="trollSwitchTab('4')" id="btn-4" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs font-bold rounded-lg text-slate-600 whitespace-nowrap">
+            <button onclick="switchTab('4')" id="btn-4" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/18 (二)<br><span class="text-xs font-normal opacity-80">Day 4</span>
             </button>
-            <button onclick="trollSwitchTab('souvenir')" id="btn-souvenir" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs font-bold rounded-lg text-amber-700 bg-amber-50/50 whitespace-nowrap">
+            <button onclick="switchTab('souvenir')" id="btn-souvenir" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 whitespace-nowrap">
                 🎁 手信<br><span class="text-xs font-normal opacity-80">Souvenirs</span>
             </button>
         </div>
 
-        <!-- DAY 1 CONTENT -->
+        <!-- ==================== DAY 1 ==================== -->
         <div id="tab-1" class="day-content active space-y-5" data-date="2026-08-15">
-            <div class="bg-white p-4 rounded-xl shadow-sm border flex flex-col gap-2">
-                <div class="flex justify-between">
-                    <span class="text-xs font-bold bg-gray-200 px-2 py-1 rounded">Day 1</span>
-                    <button onclick="trollMap()" class="text-xs text-red-500 underline">地圖</button>
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1599824436794-df8861be5307?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-indigo-950/90 via-indigo-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-amber-300">DAY 01 散策</span>
+                    <h2 class="text-base font-bold md:text-lg">大稻埕老街復古散策 ➔ 開幕煙火</h2>
                 </div>
-                <h3 class="font-bold">抵達台北 & 寄放行李</h3>
-                <p class="text-xs text-gray-500">提示：系統可能不會正確顯示當前資訊。</p>
+            </div>
+
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="08:50" data-end="11:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1483450388369-9ed95738483c?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">上午</span>
+                            <button onclick="updateMap('台北凱撒大飯店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">抵達台北 & 寄放行李</h3>
+                        <p class="text-sm text-slate-600 mt-1">08:55 降落桃機，飯店櫃檯先寄放行李，不辦理入住。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>備註：</b>櫃檯寄放行李</div>
+                            <div>🚇 <b>交通：</b>搭乘桃園機場捷運直達車至台北車站，步行至 M6 出口旁 (約 45 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="11:00" data-end="14:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">午餐</span>
+                            <button onclick="updateMap('雙月食品社 青島店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">雙月食品社 (青島店) 🍲</h3>
+                        <p class="text-sm text-slate-600 mt-1">米其林必比登推薦，下機後先來碗鮮美雞湯與東石鮮蚵，現場排隊。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>11:00 - 14:00 (週日公休)</div>
+                            <div>🚇 <b>交通：</b>從台北凱撒大飯店步行約 8 - 10 分鐘</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="14:00" data-end="16:30">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">下午</span>
+                            <button onclick="updateMap('臺北霞海城隍廟')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">大稻埕 / 迪化街散策 🏮</h3>
+                        <p class="text-sm text-slate-600 mt-1">參拜求緣極靈驗的城隍廟，逛復古老街，並在大稻埕老宅內享用質感茶飲【琅茶本舖】或【品 PIN THE SAVOR】。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>城隍廟 07:00 - 19:00 / 茶飲依店家公告為準 (約 11:00/12:00 開始)</div>
+                            <div>🚇 <b>交通：</b>捷運善導寺站搭板南線至西門站，轉松山新店線至北門站，再步行 10 分鐘進入迪化街 (約 15 分鐘，核心區內全程步行)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="16:30" data-end="18:30">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">下午茶</span>
+                            <button onclick="updateMap('登波咖啡')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">登波咖啡 & SNAPPP 相機 ☕</h3>
+                        <p class="text-sm text-slate-600 mt-1">往赤峰街散步。在登波咖啡黃椅前拍美照吃肉桂捲，並到超潮相機店 SNAPPP 買台即可拍相機準備拍煙火。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>登波 11:00 - 19:00 / SNAPPP 14:00 - 21:00</div>
+                            <div>🚇 <b>交通：</b>從迪化街步行往赤峰街方向移動約 12 - 15 分鐘</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-indigo-950 text-white rounded-xl overflow-hidden shadow-lg border border-indigo-900 transition-all" data-start="18:30" data-end="20:00">
+                <div class="w-full h-44 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=1173&auto=format&fit=crop');"></div>
+                <div class="p-4 md:p-5">
+                    <div class="flex justify-between items-start mb-1.5">
+                        <span class="bg-amber-500 text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded">重頭戲</span>
+                        <button onclick="updateMap('大稻埕碼頭')" class="text-amber-400 text-sm flex items-center gap-1 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                    </div>
+                    <h3 class="font-bold text-lg text-white">2026 大稻埕夏日節開幕煙火 🎆</h3>
+                    <p class="text-sm text-indigo-100 mt-1">因應傍晚的煙火交管，晚餐請在迪化街周邊輕鬆吃在地小吃（如民樂旗魚米粉），務必於 18:30 前吃飽向碼頭移動，在河岸迎接最璀璨煙花。</p>
+                    <div class="text-xs text-indigo-200 mt-3 space-y-1 bg-indigo-900/40 p-2.5 rounded-lg border border-indigo-800">
+                        <div>🕒 <b>時間：</b>煙火施放以官方為準 (通常為 20:00/20:30) / 小吃依各攤位為準</div>
+                        <div>🚇 <b>交通：</b>小吃周邊步行即可；煙火結束後千萬不要嘗試叫車，請直接隨人潮步行回捷運北門站</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-950 text-amber-400 text-xs font-bold px-2 py-0.5 rounded border border-amber-500/30">Bar 1</span>
+                            <button onclick="updateMap('酒精交易所')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-white mt-1.5">酒精交易所 🥂</h3>
+                        <p class="text-sm text-slate-300 mt-1">位於大稻埕的百年古蹟歷史建築內（原黑美人大酒家舊址），高挑巴洛克風裝潢超華麗、拍照極美。完美避開捷運第一波散場人潮！</p>
+                        <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
+                            <div>🕒 <b>時間：</b>20:00 - 02:00</div>
+                            <div>🚇 <b>交通：</b>煙火散場後直接步行約 8 - 10 分鐘抵達；喝完後可由捷運北門站搭 1 站回台北車站飯店</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- DAY 2 CONTENT -->
-        <div id="tab-2" class="day-content space-y-5">
-            <div class="bg-white p-4 rounded-xl shadow-sm border flex flex-col gap-2">
-                <h3 class="font-bold">華山 1914 文創園區</h3>
-                <p class="text-xs text-gray-500">按鈕似乎帶你來到錯誤的分頁...</p>
+        <!-- ==================== DAY 2 ==================== -->
+        <div id="tab-2" class="day-content space-y-5" data-date="2026-08-16">
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-emerald-300">DAY 02 文創</span>
+                    <h2 class="text-sm font-bold md:text-lg">華山網美看展 ➔ 中山區火力血拼</h2>
+                </div>
+            </div>
+
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="09:00" data-end="11:30">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1592595896551-12b371d546d5?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">上午</span>
+                            <button onclick="updateMap('華山1914文化創意產業園區')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">華山 1914 文創園區 🌿</h3>
+                        <p class="text-sm text-slate-600 mt-1">早晨的華山人潮最少，紅磚牆與斑駁的綠藤蔓超級殺底片、拍美照。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>園區戶外 24 小時開放</div>
+                            <div>🚇 <b>交通：</b>從台北車站搭捷運板南線至忠孝新生站，1 號出口步行 3 分鐘 (約 8 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="11:30" data-end="13:30">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">下午茶</span>
+                            <button onclick="updateMap('Aki Matcha Bar')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">Aki Matcha Bar 🍵</h3>
+                        <p class="text-sm text-slate-600 mt-1">華山散步後前去品嚐極致濃郁的現刷日系抹茶與精緻抹系甜點，抹茶控天花板。★建議線上預約。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>11:00 - 18:00 (17:00 最後點餐)</div>
+                            <div>🚇 <b>交通：</b>位於華山園區周邊，全程步行即可到達</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="13:30" data-end="18:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1555529669-e69e7aa0ba9a?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2 py-0.5 rounded">下午 (血拼)</span>
+                            <button onclick="updateMap('UR LIVING 中山店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">中山區瘋狂血拼與拍貼 🛍️</h3>
+                        <p class="text-sm text-slate-600 mt-1">朝聖獨棟 UR Living，瘋逛 Laura 服飾、D+AF 網美鞋店、玉如阿姨。順便吃【灑白甜鮮奶麻糬】、【CREM】霜淇淋並逛【魷布院】。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>備註：</b>中山區下午貨最齊全。*買完可搭 1 站捷運回北車飯店放戰利品。*</div>
+                            <div>🚇 <b>交通：</b>從捷運忠孝新生站搭板南線至西門站，轉松山新店線至中山站 (約 15 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="18:00" data-end="20:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">晚餐</span>
+                            <button onclick="updateMap('青花驕麻辣鍋光復南店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">青花驕麻辣鍋 (光復南店) 🌶️</h3>
+                        <p class="text-sm text-slate-600 mt-1">網美級別的精緻麻辣鍋物，香氣十足且擺盤具高級美感。★建議提前 inline 預約。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>11:30 - 01:00 (凌晨)</div>
+                            <div>🚇 <b>交通：</b>從捷運台北車站搭板南線至國父紀念館站，5 號出口步行約 5 - 8 分鐘 (約 15 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-950 text-amber-400 text-xs font-bold px-2 py-0.5 rounded border border-amber-500/30">Bar 2</span>
+                            <button onclick="updateMap('安慰劑 Placebo Taipei')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-white mt-1.5">安慰劑 Placebo 🏮</h3>
+                        <p class="text-sm text-slate-300 mt-1">極具特色的中式復古風格客棧酒吧，大紅燈籠與木質裝潢極有氛圍，調酒大碗又好拍！★建議提前預約。</p>
+                        <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
+                            <div>🕒 <b>時間：</b>20:00 - 02:00 (週日有營業，喝完可搭信義線直達飯店)</div>
+                            <div>🚇 <b>交通：</b>從青花驕餐廳直接搭乘捷運淡水信義線前往信義安和站 (約 20 - 25 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- DAY 3 CONTENT -->
-        <div id="tab-3" class="day-content space-y-5">
-            <div class="bg-white p-4 rounded-xl shadow-sm border flex flex-col gap-2">
-                <h3 class="font-bold">科教館特展</h3>
+        <!-- ==================== DAY 3 ==================== -->
+        <div id="tab-3" class="day-content space-y-5" data-date="2026-08-17">
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-teal-950/90 via-teal-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-teal-300">DAY 03 藝術</span>
+                    <h2 class="text-sm font-bold md:text-lg">科教館視覺展覽 ➔ 民生社區質感散策</h2>
+                </div>
+            </div>
+
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="10:00" data-end="12:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1543857778-c4a1a3e0b2eb?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">上午</span>
+                            <button onclick="updateMap('國立臺灣科學教育館')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">【奇想世界：Anna & Daniel 特展】 🎨</h3>
+                        <p class="text-sm text-slate-600 mt-1">位於科教館 7 樓，具備強烈視覺張力的現代網美視覺藝術特展，非常適合拍照。門票：$117。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>特展 10:00 - 18:00 (展期：6/19 － 9/28)</div>
+                            <div>🚇 <b>交通：</b>從台北車站搭捷運淡水信義線至劍潭站，轉乘公車（紅30、41、兒樂1號）至「科學教育館站」下車 (約 25 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="12:00" data-end="14:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">午餐</span>
+                            <button onclick="updateMap('青驕膠原麵館')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">青驕膠原麵館 🍜</h3>
+                        <p class="text-sm text-slate-600 mt-1">青花驕旗下全新個人麵食品牌，裝潢走摩登新時髦風，現場候位，一個人也能從容優雅享受極品麻辣麵。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>11:00 - 21:00</div>
+                            <div>🚇 <b>交通：</b>從科教館搭公車（紅30）回到捷運劍潭站，搭捷運至雙連站，出站步行約 8 分鐘 (約 25 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="14:00" data-end="18:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">下午茶</span>
+                            <button onclick="updateMap('三徑就荒')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">民生社區質感品茗與散策 🌳</h3>
+                        <p class="text-sm text-slate-600 mt-1">台北最綠意盎然林蔭街道。外帶一杯【伊良可樂】，隨後進入【三徑就荒】（★建議官網預約）或【Terra Bean to Bar】品嚐頂級茶飲或巧克力。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>三徑就荒 12:00 - 20:00 / Terra 11:00 - 19:00</div>
+                            <div>🚇 <b>交通：</b>從捷運雙連站搭捷運至松江南京站，再轉松山新店線至開南三民站，出站步行前往 (約 25 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="18:00" data-end="20:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">晚餐</span>
+                            <button onclick="updateMap('獅子餐桌 LIONS TABLE')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">獅子餐桌 LION'S TABLE 🦁</h3>
+                        <p class="text-sm text-slate-600 mt-1">店內裝潢充滿精緻的歐陸異國風情，私房法式料理極具美味浪漫。★建議提早致電或粉專預約。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>備註：</b>建議提前預約</div>
+                            <div>🚇 <b>交通：</b>位於民生社區/光復南路一帶，從下午茶地點全程步行即可到達</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-950 text-amber-400 text-xs font-bold px-2 py-0.5 rounded border border-amber-500/30">Bar 3</span>
+                            <button onclick="updateMap('tei by OBOND')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-white mt-1.5">[tei] by O'BOND 🍃</h3>
+                        <p class="text-sm text-slate-300 mt-1">極隱密的東方美學茶酒吧。空間視覺感非常震撼，融入頂級茶香。★建議提前 inline 預約。</p>
+                        <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
+                            <div>🕒 <b>時間：</b>20:00 – 02:00 (週一有開)</div>
+                            <div>🚇 <b>交通：</b>位於光復南路巷弄內，從晚餐餐廳步行約 5 - 10 分鐘即可抵達</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- DAY 4 CONTENT -->
-        <div id="tab-4" class="day-content space-y-5">
-            <div class="bg-white p-4 rounded-xl shadow-sm border flex flex-col gap-2">
-                <h3 class="font-bold">天天利美食坊</h3>
+        <!-- ==================== DAY 4 ==================== -->
+        <div id="tab-4" class="day-content space-y-5" data-date="2026-08-18">
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-slate-300">DAY 04 告別</span>
+                    <h2 class="text-sm font-bold md:text-lg">手信巡禮 ➔ 松菸古蹟優雅告別街拍</h2>
+                </div>
+            </div>
+
+            <!-- Card 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="10:30" data-end="12:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">上午</span>
+                            <button onclick="updateMap('天天利美食坊')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">天天利美食坊 🍳</h3>
+                        <p class="text-sm text-slate-600 mt-1">飯店辦理退房並將大件行李寄放在櫃檯。11:00 提早進西門町享用招牌邪惡半熟蛋滷肉飯，完美避開人潮。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>11:00 - 22:30 (週二有營業)</div>
+                            <div>🚇 <b>交通：</b>從台北車站搭捷運板南線至西門站， 6 號出口步行 3 分鐘 (約 8 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="12:00" data-end="13:30">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">中午</span>
+                            <button onclick="updateMap('承繼 CHENG JI')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">【承繼】提取經典手信 🥐</h3>
+                        <p class="text-sm text-slate-600 mt-1">中午 12:00 一開門精準提取網美肉桂捲/千層，省時又省力。★強烈建議出發前先在官網預訂，這樣最後一天就不用提著手信四處走了。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>12:00 開始營業</div>
+                            <div>🚇 <b>交通：</b>從捷運西門站搭松山新店線至南京復興站，轉文湖線至中山國中站，出站步行 5 分鐘 (約 15 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="13:30" data-end="18:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1568992687947-868a62a9f521?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">下午</span>
+                            <button onclick="updateMap('松山文創園區')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">松山文創園區 🏛️</h3>
+                        <p class="text-sm text-slate-600 mt-1">買完承繼後，立刻搭捷運回台北車站把手信放到飯店寄存。再次保持兩手空空前往松菸，在巴洛克花園拍優雅告別街拍美照與最後巡禮。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>🕒 <b>時間：</b>園區室內展館 09:00 - 18:00 (台北凱撒大飯店寄物)</div>
+                            <div>🚇 <b>交通：</b>捷運中山國中站回北車放東西，再搭板南線至國父紀念館站 5 號出口步行約 8 分鐘 (全程約 20 分鐘)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-slate-900 text-white rounded-xl overflow-hidden shadow-md flex transition-all" data-start="18:00" data-end="23:00">
+                <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-slate-800 text-slate-200 text-xs font-bold px-2 py-0.5 rounded">回程</span>
+                            <button onclick="updateMap('桃園國際機場')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-white mt-1.5">回飯店拿行李 ➔ 桃機回港 ✈️</h3>
+                        <p class="text-sm text-slate-300 mt-1">從松菸搭捷運回到飯店取回行李與承繼手信，直接搭乘桃園機場捷運直達車前往機場。搭乘 21:05 國泰航空 CX 479 回港，完美結束台北之旅！</p>
+                        <div class="text-xs text-slate-400 mt-3 space-y-1 bg-slate-800/60 p-2 rounded-lg border border-slate-700">
+                            <div>🕒 <b>時間：</b>班機 21:05 起飛，建議於 18:30 前抵達機場辦理登機</div>
+                            <div>🚇 <b>交通：</b>捷運國父紀念館站回北車約 12 分鐘；機捷直達車至機場約 39 分鐘</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <!-- SOUVENIR CONTENT -->
+        <!-- ==================== SOUVENIR TAB ==================== -->
         <div id="tab-souvenir" class="day-content space-y-5">
-            <div class="bg-white p-4 rounded-xl shadow-sm border flex flex-col gap-2">
-                <h3 class="font-bold">台北必買手信清單</h3>
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-amber-950/90 via-amber-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-amber-300 uppercase">Shopping List</span>
+                    <h2 class="text-base font-bold md:text-lg">台北必買手信清單 🛍️</h2>
+                </div>
+            </div>
+
+            <!-- Item 1 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">烘焙糕點</span>
+                            <button onclick="updateMap('樂沐糕餅舖')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">1. 樂沐糕餅舖 🥐</h3>
+                        <p class="text-sm text-slate-600 mt-1">法式頂級工藝烘焙，主打法式甜品、精緻法式塔類與奶油法式小點。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>法式千層派、奶油曲奇、精緻禮盒</div>
+                            <div>📌 <b>備註：</b>建議提前確認品項預訂或營業時間</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">人氣甜點</span>
+                            <button onclick="updateMap('承繼 CHENG JI')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">2. 承繼 CHENG JI 焦糖起司蛋糕 🍰</h3>
+                        <p class="text-sm text-slate-600 mt-1">台北話題爆棚的焦糖起司蛋糕與肉桂捲，極具質感且外盒精美。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>-18°C 焦糖起司蛋糕、肉桂阿曼</div>
+                            <div>📌 <b>備註：</b>Day 4 已安排取貨，請務必提早於官網線上預訂！</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">在地特色</span>
+                            <button onclick="updateMap('好丘 信義店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">3. 好丘 Bagel 🥯</h3>
+                        <p class="text-sm text-slate-600 mt-1">台灣 Q 彈貝果天花板，融合台灣在地食材特色（如紅茶、地瓜、芋頭等）。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>厚醬貝果、台灣茶系列貝果、草莓乳酪</div>
+                            <div>📌 <b>地點：</b>四四南村信義店、松菸店或台北車站微風專櫃</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">傳統滷味</span>
+                            <button onclick="updateMap('上海老天祿滷味')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">4. 老天祿鴨舌 🦆</h3>
+                        <p class="text-sm text-slate-600 mt-1">西門町數十年港星最愛老字號，中藥滷汁香濃入味，啃骨香氣十足。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>招牌鴨舌、鴨翅、脆腸、豆干</div>
+                            <div>📌 <b>提示：</b>可購買真空包裝方便外帶或回港享用</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
     </main>
 
     <!-- Bottom Notification Bar -->
-    <div id="status-bar" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white px-4 py-3.5 text-xs flex justify-between items-center z-50">
+    <div id="status-bar" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white px-4 py-3.5 text-xs md:text-sm flex justify-between items-center shadow-2xl border-t border-slate-800 z-50 max-w-md mx-auto md:max-w-2xl">
         <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
-            <span id="current-time-text" class="font-medium text-red-400">系統連線異常...</span>
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span id="current-time-text" class="font-medium">助手啟動中...</span>
         </div>
-        <span class="text-slate-500">旅途助手 (錯誤)</span>
+        <span class="text-slate-400 font-medium">旅途助手 📱</span>
     </div>
 
-    <!-- Frustrating JavaScript -->
+    <!-- Modified Frustrating Javascript -->
     <script>
-        // Switch to a RANDOM tab instead of the intended target
-        function trollSwitchTab(requestedTab) {
-            const tabs = ['1', '2', '3', '4', 'souvenir'];
-            const randomTab = tabs[Math.floor(Math.random() * tabs.length)];
+        // Map prank: scrolls to bottom instead of staying focused
+        function updateMap(locationName) {
+            const mapIframe = document.getElementById('google-map');
+            const mapTargetText = document.getElementById('map-target');
+            mapIframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(locationName)}&t=&z=16&ie=UTF-8&iwloc=&output=embed`;
+            mapTargetText.innerText = locationName;
             
-            document.querySelectorAll('.day-content').forEach(c => c.classList.remove('active'));
-            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
-
-            const targetSection = document.getElementById('tab-' + randomTab);
-            if (targetSection) targetSection.classList.add('active');
-
-            const activeBtn = document.getElementById('btn-' + randomTab);
-            if (activeBtn) activeBtn.classList.add('active');
-
-            alert(`您點擊了 Day ${requestedTab}`);
-        }
-
-        // Send user to bottom of screen on map click
-        function trollMap() {
+            // Annoying behavior: Scrolls to the very bottom
             window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
         }
 
-        function annoyUser() {
-            alert("伺服器繁忙，請 99 秒後再試。");
+        // Tab prank: adds a delay and sometimes switches to a random tab
+        function switchTab(tabId) {
+            const tabs = ['1', '2', '3', '4', 'souvenir'];
+            // 40% chance to jump to a wrong tab
+            const targetTab = Math.random() < 0.4 ? tabs[Math.floor(Math.random() * tabs.length)] : tabId;
+
+            setTimeout(() => {
+                document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                    if(!btn.id.includes('souvenir')) {
+                        btn.classList.add('text-slate-600', 'hover:bg-slate-50');
+                    }
+                });
+
+                const targetSection = document.getElementById('tab-' + targetTab);
+                if (targetSection) {
+                    targetSection.classList.add('active');
+                }
+
+                const activeBtn = document.getElementById('btn-' + targetTab);
+                if(activeBtn) {
+                    activeBtn.classList.add('active');
+                    activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+                }
+            }, 300);
         }
 
-        // Random fake time generator
-        setInterval(() => {
-            const randomHour = String(Math.floor(Math.random() * 24)).padStart(2, '0');
-            const randomMin = String(Math.floor(Math.random() * 60)).padStart(2, '0');
-            document.getElementById('current-time-text').innerText = `目前時間: ${randomHour}:${randomMin} (亂數)`;
-        }, 2000);
+        function checkCurrentItinerarySlot() {
+            // Fake time updates
+            const hours = String(Math.floor(Math.random() * 24)).padStart(2, '0');
+            const minutes = String(Math.floor(Math.random() * 60)).padStart(2, '0');
+            document.getElementById('current-time-text').innerText = `目前時間: ${hours}:${minutes} (搜尋中)`;
+        }
+
+        function focusCurrentSlot() {
+            alert("目前時間沒有對應的行程安排（系統載入失敗）。");
+        }
+
+        setInterval(checkCurrentItinerarySlot, 2000);
     </script>
 </body>
 </html>
