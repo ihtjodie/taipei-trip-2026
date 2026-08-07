@@ -7,27 +7,22 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        * { cursor: wait !important; }
         .day-content { display: none; }
         .day-content.active { display: block; }
         .tab-btn.active { background-color: #1e3a8a; color: white; border-color: #1e3a8a; }
-        .current-now { animation: pulseBorder 1s infinite; border: 3px solid #ef4444 !important; }
+        .current-now { animation: pulseBorder 2s infinite; border: 3px solid #ef4444 !important; }
         @keyframes pulseBorder {
             0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
             70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
             100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
-        .tab-btn:hover {
-            transform: translate(calc(Math.random() * 16px - 8px), calc(Math.random() * 16px - 8px));
-        }
-        body { user-select: none; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased pb-28">
 
-    <!-- 頂部封面 Banner -->
+    <!-- 頂部超靚大 Banner 封面 -->
     <header class="relative bg-slate-900 text-white min-h-[260px] flex items-center justify-center p-6 text-center shadow-lg overflow-hidden">
-        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1552993873-0dd1110e025f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0');"></div>
+        <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1552993873-0dd1110e025f?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-black/50 via-slate-950/80 to-slate-950"></div>
         <div class="relative z-10 space-y-3">
             <span class="text-sm font-bold tracking-widest text-amber-400 uppercase bg-amber-400/20 px-4 py-1.5 rounded-full backdrop-blur-sm">Taipei Getaway 2026</span>
@@ -67,7 +62,7 @@
     <!-- Main Container -->
     <main class="max-w-md mx-auto px-4 py-5 md:max-w-2xl">
         
-        <!-- Day Navigation Tabs -->
+        <!-- Day Navigation Tabs (Sticky) -->
         <div class="flex justify-between bg-white/90 backdrop-blur-md rounded-xl shadow-sm p-1.5 mb-6 border border-slate-200 sticky top-3 z-50 overflow-x-auto gap-1">
             <button onclick="switchTab('1')" id="btn-1" class="tab-btn active flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all whitespace-nowrap">
                 8/15 (六)<br><span class="text-xs font-normal opacity-80">Day 1</span>
@@ -81,10 +76,14 @@
             <button onclick="switchTab('4')" id="btn-4" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-slate-600 hover:bg-slate-50 whitespace-nowrap">
                 8/18 (二)<br><span class="text-xs font-normal opacity-80">Day 4</span>
             </button>
+            <button onclick="switchTab('souvenir')" id="btn-souvenir" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 whitespace-nowrap">
+                🎁 手信<br><span class="text-xs font-normal opacity-80">Souvenirs</span>
+            </button>
         </div>
 
         <!-- ==================== DAY 1 ==================== -->
         <div id="tab-1" class="day-content active space-y-5" data-date="2026-08-15">
+            <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1599824436794-df8861be5307?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-indigo-950/90 via-indigo-900/70 to-transparent"></div>
@@ -170,9 +169,9 @@
                 </div>
             </div>
 
-            <!-- Card 5 -->
+            <!-- Card 5 (Fireworks) -->
             <div class="bg-indigo-950 text-white rounded-xl overflow-hidden shadow-lg border border-indigo-900 transition-all" data-start="18:30" data-end="20:00">
-                <div class="w-full h-44 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=1173&auto=format&fit=crop');"></div>
+                <div class="w-full h-44 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
                 <div class="p-4 md:p-5">
                     <div class="flex justify-between items-start mb-1.5">
                         <span class="bg-amber-500 text-slate-950 text-xs font-bold px-2.5 py-0.5 rounded">重頭戲</span>
@@ -187,7 +186,7 @@
                 </div>
             </div>
 
-            <!-- Card 6 -->
+            <!-- Card 6 (Bar 1) -->
             <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -209,6 +208,7 @@
 
         <!-- ==================== DAY 2 ==================== -->
         <div id="tab-2" class="day-content space-y-5" data-date="2026-08-16">
+            <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1572116469696-31de0f17cc34?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/70 to-transparent"></div>
@@ -294,7 +294,7 @@
                 </div>
             </div>
 
-            <!-- Card 5 -->
+            <!-- Card 5 (Bar 2) -->
             <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -316,6 +316,7 @@
 
         <!-- ==================== DAY 3 ==================== -->
         <div id="tab-3" class="day-content space-y-5" data-date="2026-08-17">
+            <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1447752875215-b2761acb3c5d?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-teal-950/90 via-teal-900/70 to-transparent"></div>
@@ -401,7 +402,7 @@
                 </div>
             </div>
 
-            <!-- Card 5 -->
+            <!-- Card 5 (Bar 3) -->
             <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -423,6 +424,7 @@
 
         <!-- ==================== DAY 4 ==================== -->
         <div id="tab-4" class="day-content space-y-5" data-date="2026-08-18">
+            <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-slate-950/90 via-slate-900/70 to-transparent"></div>
@@ -438,7 +440,7 @@
                 <div class="p-4 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start">
-                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">上午</span>
+                            <span class="bg-slate-100 text-slate-700 text-[12px] font-bold px-2 py-0.5 rounded">上午</span>
                             <button onclick="updateMap('天天利美食坊')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">天天利美食坊 🍳</h3>
@@ -489,7 +491,7 @@
                 </div>
             </div>
 
-            <!-- Card 4 -->
+            <!-- Card 4 (Airport) -->
             <div class="bg-slate-900 text-white rounded-xl overflow-hidden shadow-md flex transition-all" data-start="18:00" data-end="23:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -511,6 +513,7 @@
 
         <!-- ==================== SOUVENIR TAB ==================== -->
         <div id="tab-souvenir" class="day-content space-y-5">
+            <!-- Souvenir Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
                 <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1513201099705-a9746e1e201f?auto=format&fit=crop&w=600&q=80');"></div>
                 <div class="absolute inset-0 bg-gradient-to-r from-amber-950/90 via-amber-900/70 to-transparent"></div>
@@ -520,26 +523,7 @@
                 </div>
             </div>
 
-            <!-- Item 1 -->
-            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
-                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=200&q=80');"></div>
-                <div class="p-4 flex-1 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">烘焙糕點</span>
-                            <button onclick="updateMap('樂沐糕餅舖')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
-                        </div>
-                        <h3 class="font-bold text-base text-slate-900 mt-1.5">1. 樂沐糕餅舖 🥐</h3>
-                        <p class="text-sm text-slate-600 mt-1">法式頂級工藝烘焙，主打法式甜品、精緻法式塔類與奶油法式小點。</p>
-                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
-                            <div>💡 <b>推薦品項：</b>法式千層派、奶油曲奇、精緻禮盒</div>
-                            <div>📌 <b>備註：</b>建議提前確認品項預訂或營業時間</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 2 -->
+            <!-- Item 1: 承繼 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -548,49 +532,87 @@
                             <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">人氣甜點</span>
                             <button onclick="updateMap('承繼 CHENG JI')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
-                        <h3 class="font-bold text-base text-slate-900 mt-1.5">2. 承繼 CHENG JI 焦糖起司蛋糕 🍰</h3>
-                        <p class="text-sm text-slate-600 mt-1">台北話題爆棚的焦糖起司蛋糕與肉桂捲，極具質感且外盒精美。</p>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">1. 承繼 CHENG JI 🥐</h3>
+                        <p class="text-sm text-slate-600 mt-1">台北話題爆棚的肉桂捲、法式千層與 -18°C 焦糖起司蛋糕，質感外盒極適合作為伴手禮。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
-                            <div>💡 <b>推薦品項：</b>-18°C 焦糖起司蛋糕、肉桂阿曼</div>
-                            <div>📌 <b>備註：</b>Day 4 已安排取貨，請務必提早於官網線上預訂！</div>
+                            <div>💡 <b>推薦品項：</b>肉桂阿曼、-18°C 焦糖起司蛋糕</div>
+                            <div>📌 <b>備註：</b>Day 4 已安排現場提取，請務必提早於官網線上預訂！</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 3 -->
+            <!-- Item 2: 魷布院 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
-                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1585478259715-876acc5be8eb?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">在地特色</span>
-                            <button onclick="updateMap('好丘 信義店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">人氣零食</span>
+                            <button onclick="updateMap('魷布院 中山店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
-                        <h3 class="font-bold text-base text-slate-900 mt-1.5">3. 好丘 Bagel 🥯</h3>
-                        <p class="text-sm text-slate-600 mt-1">台灣 Q 彈貝果天花板，融合台灣在地食材特色（如紅茶、地瓜、芋頭等）。</p>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">2. 魷布院 🦑</h3>
+                        <p class="text-sm text-slate-600 mt-1">近期在中山區極具話題、深受旅客喜愛的質感魷魚製品與特色伴手禮專賣店。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
-                            <div>💡 <b>推薦品項：</b>厚醬貝果、台灣茶系列貝果、草莓乳酪</div>
-                            <div>📌 <b>地點：</b>四四南村信義店、松菸店或台北車站微風專櫃</div>
+                            <div>💡 <b>推薦品項：</b>各式風味魷魚乾、碳烤魷魚片</div>
+                            <div>📌 <b>備註：</b>Day 2 中山區血拼時可順路前往選購。</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Item 4 -->
+            <!-- Item 3: 甜滿牛札餅 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
-                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1558961363-fa8fdf82db35?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
                     <div>
                         <div class="flex justify-between items-start">
-                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">傳統滷味</span>
-                            <button onclick="updateMap('上海老天祿滷味')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                            <span class="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-0.5 rounded">排隊名店</span>
+                            <button onclick="updateMap('甜滿 Tian Man')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
-                        <h3 class="font-bold text-base text-slate-900 mt-1.5">4. 老天祿鴨舌 🦆</h3>
-                        <p class="text-sm text-slate-600 mt-1">西門町數十年港星最愛老字號，中藥滷汁香濃入味，啃骨香氣十足。</p>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">3. 甜滿牛軋餅 (Tian Man) 🍪</h3>
+                        <p class="text-sm text-slate-600 mt-1">被譽為神級好吃的蔥香牛軋餅，口感外酥內軟、不黏牙，鹹甜交織極易上癮。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
-                            <div>💡 <b>推薦品項：</b>招牌鴨舌、鴨翅、脆腸、豆干</div>
-                            <div>📌 <b>提示：</b>可購買真空包裝方便外帶或回港享用</div>
+                            <div>💡 <b>推薦品項：</b>經典蔥香牛軋餅</div>
+                            <div>📌 <b>備註：</b>常需排隊或早起購買，建議留意當日營業與現場狀況。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 4: WHOSMiNG 聯名咖啡豆/周邊 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-indigo-100 text-indigo-800 text-xs font-bold px-2 py-0.5 rounded">Threads 熱推 ☕</span>
+                            <button onclick="updateMap('WHOSMiNG')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">4. WHOSMiNG 咖啡豆 / 質感周邊 🎨</h3>
+                        <p class="text-sm text-slate-600 mt-1">人氣插畫家 MiNG 的咖啡品牌與選物，極受香港文青與咖啡迷喜愛，手繪咖啡杯圖案與精選配方豆質感滿分。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>聯名咖啡掛耳包、手繪風咖啡杯、文創周邊</div>
+                            <div>📌 <b>備註：</b>送給懂咖啡或喜歡日系簡約風格的朋友首選。</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 5: But. we love butter -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all">
+                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=200&q=80');"></div>
+                <div class="p-4 flex-1 flex flex-col justify-between">
+                    <div>
+                        <div class="flex justify-between items-start">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-bold px-2 py-0.5 rounded">潮流必買 🧈</span>
+                            <button onclick="updateMap('But. we love butter')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                        </div>
+                        <h3 class="font-bold text-base text-slate-900 mt-1.5">5. But. we love butter 🧈</h3>
+                        <p class="text-sm text-slate-600 mt-1">台北最具話題的奶油餅乾名店！不只店面像極美式復古藝廊，厚夾餅乾（如濃醬奶油餅乾）更是香氣濃郁、包裝潮到出水。</p>
+                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                            <div>💡 <b>推薦品項：</b>濃厚奶油餅乾禮盒（生乳酪蜂蜜/鹹蛋黃核桃）</div>
+                            <div>📌 <b>備註：</b>拿出手面子十足，後生仔收到一定心微甜。</div>
                         </div>
                     </div>
                 </div>
@@ -608,59 +630,86 @@
         <span class="text-slate-400 font-medium">旅途助手 📱</span>
     </div>
 
-    <!-- Modified Frustrating Javascript -->
+    <!-- Core Javascript Functions -->
     <script>
-        // Map prank: scrolls to bottom instead of staying focused
         function updateMap(locationName) {
             const mapIframe = document.getElementById('google-map');
             const mapTargetText = document.getElementById('map-target');
             mapIframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(locationName)}&t=&z=16&ie=UTF-8&iwloc=&output=embed`;
             mapTargetText.innerText = locationName;
-            
-            // Annoying behavior: Scrolls to the very bottom
-            window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // Tab prank: adds a delay and sometimes switches to a random tab
         function switchTab(tabId) {
-            const tabs = ['1', '2', '3', '4', 'souvenir'];
-            // 40% chance to jump to a wrong tab
-            const targetTab = Math.random() < 0.4 ? tabs[Math.floor(Math.random() * tabs.length)] : tabId;
-
-            setTimeout(() => {
-                document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
-                document.querySelectorAll('.tab-btn').forEach(btn => {
-                    btn.classList.remove('active');
-                    if(!btn.id.includes('souvenir')) {
-                        btn.classList.add('text-slate-600', 'hover:bg-slate-50');
-                    }
-                });
-
-                const targetSection = document.getElementById('tab-' + targetTab);
-                if (targetSection) {
-                    targetSection.classList.add('active');
+            document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if(!btn.id.includes('souvenir')) {
+                    btn.classList.add('text-slate-600', 'hover:bg-slate-50');
                 }
+            });
 
-                const activeBtn = document.getElementById('btn-' + targetTab);
-                if(activeBtn) {
-                    activeBtn.classList.add('active');
-                    activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
-                }
-            }, 300);
+            const targetSection = document.getElementById('tab-' + tabId);
+            if (targetSection) {
+                targetSection.classList.add('active');
+            }
+
+            const activeBtn = document.getElementById('btn-' + tabId);
+            if(activeBtn) {
+                activeBtn.classList.add('active');
+                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+            }
         }
 
         function checkCurrentItinerarySlot() {
-            // Fake time updates
-            const hours = String(Math.floor(Math.random() * 24)).padStart(2, '0');
-            const minutes = String(Math.floor(Math.random() * 60)).padStart(2, '0');
-            document.getElementById('current-time-text').innerText = `目前時間: ${hours}:${minutes} (搜尋中)`;
+            const now = new Date();
+            const yyyy = now.getFullYear();
+            const mm = String(now.getMonth() + 1).padStart(2, '0');
+            const dd = String(now.getDate()).padStart(2, '0');
+            const currentDateStr = `${yyyy}-${mm}-${dd}`;
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const currentTimeStr = `${hours}:${minutes}`;
+
+            document.getElementById('current-time-text').innerText = `目前時間: ${currentTimeStr}`;
+            document.querySelectorAll('[data-start]').forEach(card => card.classList.remove('current-now'));
+
+            let matchedCard = null;
+
+            const days = document.querySelectorAll('.day-content');
+            days.forEach((daySection) => {
+                if (daySection.getAttribute('data-date') === currentDateStr) {
+                    const cards = daySection.querySelectorAll('[data-start]');
+                    cards.forEach(card => {
+                        const start = card.getAttribute('data-start');
+                        const end = card.getAttribute('data-end');
+                        if (currentTimeStr >= start && currentTimeStr <= end) {
+                            matchedCard = card;
+                        }
+                    });
+                }
+            });
+
+            if (matchedCard) {
+                matchedCard.classList.add('current-now');
+            }
         }
 
         function focusCurrentSlot() {
-            alert("目前時間沒有對應的行程安排（系統載入失敗）。");
+            const currentSlot = document.querySelector('.current-now');
+            if (currentSlot) {
+                const parentTabId = currentSlot.parentElement.id.replace('tab-', '');
+                switchTab(parentTabId);
+                setTimeout(() => {
+                    currentSlot.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 200);
+            } else {
+                alert("目前時間沒有對應的行程安排（或您不在旅行日期之內）。");
+            }
         }
 
-        setInterval(checkCurrentItinerarySlot, 2000);
+        checkCurrentItinerarySlot();
+        setInterval(checkCurrentItinerarySlot, 60000);
     </script>
 </body>
 </html>
