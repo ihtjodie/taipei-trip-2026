@@ -20,7 +20,7 @@
         .modal.active { display: flex; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased pb-28">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased pb-10">
 
     <!-- 頂部超靚大 Banner 封面 -->
     <header class="relative bg-slate-900 text-white min-h-[260px] flex items-center justify-center p-6 text-center shadow-lg overflow-hidden">
@@ -38,24 +38,8 @@
         </div>
     </header>
 
-    <!-- Google Map View Area -->
-    <section class="max-w-md mx-auto mt-5 px-4 md:max-w-2xl">
-        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100">
-            <div class="bg-slate-900 px-4 py-3 text-sm font-bold text-white flex justify-between items-center">
-                <span><i class="fa-solid fa-map-location-dot text-amber-400 mr-1.5"></i> LINE 行程地圖預覽</span>
-                <span id="map-target" class="text-xs text-slate-300 font-normal">台北凱撒大飯店</span>
-            </div>
-            <div class="relative w-full h-56 bg-slate-200">
-                <iframe id="google-map" class="absolute top-0 left-0 w-full h-full border-0" 
-                    src="https://maps.google.com/maps?q=台北凱撒大飯店&t=&z=15&ie=UTF-8&iwloc=&output=embed" 
-                    allowfullscreen>
-                </iframe>
-            </div>
-        </div>
-    </section>
-
     <!-- Interactive Toolbox -->
-    <section class="max-w-md mx-auto mt-4 px-4 md:max-w-2xl flex">
+    <section class="max-w-md mx-auto mt-5 px-4 md:max-w-2xl flex">
         <button onclick="focusCurrentSlot()" class="w-full bg-red-50 hover:bg-red-100 text-red-700 text-sm font-semibold py-3 px-4 rounded-xl border border-red-200 shadow-sm flex items-center justify-center gap-2 transition-all">
             <i class="fa-solid fa-crosshairs text-red-500"></i> 追蹤現在行程
         </button>
@@ -124,7 +108,6 @@
                             <button onclick="updateMap('雙月食品社 青島店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">雙月食品社 (青島店) 🍲</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.moonmoonfood.com/CISTopic?g=S00010" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> Menu</a>
                             <a href="https://www.instagram.com/moon_moon_food" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
@@ -149,7 +132,6 @@
                                 <button onclick="updateMap('臺北霞海城隍廟')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                             </div>
                             <h3 class="font-bold text-base text-slate-900 mt-1.5">大稻埕 / 迪化街散策 🏮</h3>
-                            <!-- 景點相關連結 -->
                             <div class="flex flex-wrap gap-1.5 mt-2">
                                 <a href="https://www.swingtaiwan.com/dadaocheng" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 老街攻略</a>
                             </div>
@@ -161,7 +143,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- 拜月老注意事項按鈕 -->
                 <div class="p-3 bg-slate-50 border-t border-slate-100">
                     <button onclick="openMatchmakerModal()" class="w-full bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold text-xs md:text-sm py-2.5 px-3 rounded-lg border border-pink-200 transition flex items-center justify-center gap-2">
                         <i class="fa-solid fa-heart text-pink-500"></i> 參拜霞海城隍廟月老注意事項指南
@@ -179,7 +160,6 @@
                             <button onclick="updateMap('登波咖啡')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">登波咖啡 & SNAPPP 相機 ☕</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/coffee_dumbo/" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
                         </div>
@@ -203,7 +183,6 @@
                     <h3 class="font-bold text-lg text-white">2026 大稻埕夏日節開幕煙火 🎆</h3>
                     <p class="text-sm text-indigo-100 mt-1">因應傍晚的煙火交管，晚餐請在迪化街周邊輕鬆吃在地小吃（如民樂旗魚米粉），務必於 18:30 前吃飽向碼頭移動，在河岸迎接最璀璨煙花。</p>
                     
-                    <!-- 觀看攻略與交通封路彈跳視窗按鈕 -->
                     <div class="mt-3">
                         <button onclick="openFireworksModal()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs md:text-sm py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center gap-2">
                             <i class="fa-solid fa-circle-info"></i> 煙火最佳觀賞點 & 交通封路指南
@@ -227,7 +206,6 @@
                             <button onclick="updateMap('澤山')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-white mt-1.5">澤山 🥂</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/zeshan_by_meth/?hl=en" target="_blank" class="bg-amber-900/40 hover:bg-amber-900/60 text-amber-300 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition border border-amber-500/30"><i class="fa-brands fa-instagram text-amber-400"></i> IG</a>
                         </div>
@@ -285,7 +263,6 @@
                             <button onclick="updateMap('Aki Matcha Bar')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">Aki Matcha Bar 🍵</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/aki_matcha_bar/?hl=en" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
                         </div>
@@ -330,9 +307,7 @@
                             <button onclick="updateMap('青花驕麻辣鍋光復南店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">青花驕麻辣鍋 (光復南店) 🌶️</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
-                           
                             <a href="https://inline.app/booking/-MaXEQcbiWaRjXyLytUu:inline-live-2/-MaXf5S05k_3QoMW32WL?language=zh-hk" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-calendar-check text-amber-600"></i> inline 預定</a>
                         </div>
                         <p class="text-sm text-slate-600 mt-1">網美級別的精緻麻辣鍋物，香氣十足且擺盤具高級美感。★建議提前 inline 預約。</p>
@@ -354,7 +329,6 @@
                             <button onclick="updateMap('安慰劑 Placebo Taipei')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-white mt-1.5">安慰劑 Placebo 🏮</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/placebotaipei/?hl=en" target="_blank" class="bg-amber-900/40 hover:bg-amber-900/60 text-amber-300 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition border border-amber-500/30"><i class="fa-brands fa-instagram text-amber-400"></i> IG</a>
                         </div>
@@ -412,7 +386,6 @@
                             <button onclick="updateMap('獅子餐桌 LIONS TABLE')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">獅子餐桌 LION'S TABLE 🦁</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://inline.app/booking/-O2clhMsFVhneQq3o8ca:inline-live-3/-O2clhZE6vdevSZi2WzP" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 預約</a>
                             <a href="https://www.instagram.com/lionstabletw" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> Terra IG</a>
@@ -436,7 +409,6 @@
                             <button onclick="updateMap('三徑就荒')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">民生社區質感品茗與散策 🌳</h3>
-                        <!-- 外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/iyoshicola_taiwan" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> 伊良可樂 台北中山 IG</a>
                             <a href="https://www.instagram.com/terra_beantobar/?hl=en" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> Terra IG</a>
@@ -460,10 +432,8 @@
                             <button onclick="updateMap('青驕膠原麵館')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">青驕膠原麵館 🍜</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://inline.app/booking/-OqsQ-y4WC0TZIUt7Deu:inline-live-4/-OqsQ05w3vI6pql6x19D" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 預約</a>
-                            
                         </div>
                         <p class="text-sm text-slate-600 mt-1">青花驕旗下全新個人麵食品牌，裝潢走摩登新時髦風，現場候位，一個人也能從容優雅享受極品麻辣麵。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
@@ -484,10 +454,8 @@
                             <button onclick="updateMap('tei by OBOND')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-white mt-1.5">[tei] by O'BOND 🍃</h3>
-                        <!-- 餐廳外部連結按鈕 -->
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/tei_by_obond/?hl=en" target="_blank" class="bg-amber-900/40 hover:bg-amber-900/60 text-amber-300 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition border border-amber-500/30"><i class="fa-brands fa-instagram text-amber-400"></i> IG</a>
-                            
                         </div>
                         <p class="text-sm text-slate-300 mt-1">極隱密的東方美學茶酒吧。空間視覺感非常震撼，融入頂級茶香。★建議提前 inline 預約。</p>
                         <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
@@ -521,7 +489,6 @@
                             <button onclick="updateMap('天天利美食坊')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">天天利美食坊 🍳</h3>
-                        <!-- 餐廳外部連結按鈕 (無官網IG則不加) -->
                         <p class="text-sm text-slate-600 mt-1">飯店辦理退房並將大件行李寄放在櫃檯。11:00 提早進西門町享用招牌邪惡半熟蛋滷肉飯，完美避開人潮。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>11:00 - 22:30 (週二有營業)</div>
@@ -717,6 +684,22 @@
 
     </main>
 
+    <!-- Google Map View Area (Moved to Bottom)[cite: 1] -->
+    <section class="max-w-md mx-auto mt-8 mb-8 px-4 md:max-w-2xl">
+        <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100">
+            <div class="bg-slate-900 px-4 py-3 text-sm font-bold text-white flex justify-between items-center">
+                <span><i class="fa-solid fa-map-location-dot text-amber-400 mr-1.5"></i> 地圖預覽</span>
+                <span id="map-target" class="text-xs text-slate-300 font-normal">台北凱撒大飯店</span>
+            </div>
+            <div class="relative w-full h-64 bg-slate-200">
+                <iframe id="google-map" class="absolute top-0 left-0 w-full h-full border-0" 
+                    src="https://maps.google.com/maps?q=台北凱撒大飯店&t=&z=15&ie=UTF-8&iwloc=&output=embed" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
     <!-- ==================== 拜月老注意事項彈跳視窗 (MODAL) ==================== -->
     <div id="matchmaker-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] items-center justify-center p-4">
         <div class="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col animate-in fade-in duration-200">
@@ -840,15 +823,6 @@
         </div>
     </div>
 
-    <!-- Bottom Notification Bar -->
-    <div id="status-bar" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white px-4 py-3.5 text-xs md:text-sm flex justify-between items-center shadow-2xl border-t border-slate-800 z-50 max-w-md mx-auto md:max-w-2xl">
-        <div class="flex items-center gap-2">
-            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span id="current-time-text" class="font-medium">助手啟動中...</span>
-        </div>
-        <span class="text-slate-400 font-medium">旅途助手 📱</span>
-    </div>
-
     <!-- Core Javascript Functions -->
     <script>
         function updateMap(locationName) {
@@ -856,7 +830,9 @@
             const mapTargetText = document.getElementById('map-target');
             mapIframe.src = `https://maps.google.com/maps?q=${encodeURIComponent(locationName)}&t=&z=16&ie=UTF-8&iwloc=&output=embed`;
             mapTargetText.innerText = locationName;
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // 點擊地圖按鈕時滾動到頁面最底部的地圖區
+            document.getElementById('google-map').scrollIntoView({ behavior: 'smooth' });
         }
 
         function switchTab(tabId) {
@@ -908,7 +884,6 @@
             const minutes = String(now.getMinutes()).padStart(2, '0');
             const currentTimeStr = `${hours}:${minutes}`;
 
-            document.getElementById('current-time-text').innerText = `目前時間: ${currentTimeStr}`;
             document.querySelectorAll('[data-start]').forEach(card => card.classList.remove('current-now'));
 
             let matchedCard = null;
@@ -941,12 +916,11 @@
                     currentSlot.scrollIntoView({ behavior: 'smooth', block: 'center' });
                 }, 200);
             } else {
-                alert("目前時間沒有對應的行程安排（或您不在旅行日期之內）。");
+                alert("未開始你嘅Trip喔 (●'◡'●)");
             }
         }
 
         checkCurrentItinerarySlot();
-        setInterval(checkCurrentItinerarySlot, 60000);
     </script>
 </body>
 </html>
