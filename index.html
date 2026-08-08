@@ -16,6 +16,8 @@
             70% { box-shadow: 0 0 0 8px rgba(239, 68, 68, 0); }
             100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
         }
+        .modal { display: none; }
+        .modal.active { display: flex; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased pb-28">
@@ -112,7 +114,7 @@
                 </div>
             </div>
 
-            <!-- Card 2 -->
+            <!-- Card 2 (Lunch: 雙月食品社) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="11:00" data-end="14:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -122,6 +124,11 @@
                             <button onclick="updateMap('雙月食品社 青島店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">雙月食品社 (青島店) 🍲</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.moonmoonfood.com/CISTopic?g=S00010" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> Menu</a>
+                            <a href="https://www.instagram.com/moon_moon_food" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">米其林必比登推薦，下機後先來碗鮮美雞湯與東石鮮蚵，現場排隊。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>11:00 - 14:00 (週日公休)</div>
@@ -131,26 +138,38 @@
                 </div>
             </div>
 
-            <!-- Card 3 -->
-            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="14:00" data-end="16:30">
-                <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=200&q=80');"></div>
-                <div class="p-4 flex-1 flex flex-col justify-between">
-                    <div>
-                        <div class="flex justify-between items-start">
-                            <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">下午</span>
-                            <button onclick="updateMap('臺北霞海城隍廟')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
-                        </div>
-                        <h3 class="font-bold text-base text-slate-900 mt-1.5">大稻埕 / 迪化街散策 🏮</h3>
-                        <p class="text-sm text-slate-600 mt-1">參拜求緣極靈驗的城隍廟，逛復古老街，並在大稻埕老宅內享用質感茶飲【琅茶本舖】或【品 PIN THE SAVOR】。</p>
-                        <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
-                            <div>🕒 <b>時間：</b>城隍廟 07:00 - 19:00 / 茶飲依店家公告為準 (約 11:00/12:00 開始)</div>
-                            <div>🚇 <b>交通：</b>捷運善導寺站搭板南線至西門站，轉松山新店線至北門站，再步行 10 分鐘進入迪化街 (約 15 分鐘，核心區內全程步行)</div>
+            <!-- Card 3 (Chenghuang Temple with Matchmaker Modal Trigger) -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex flex-col transition-all" data-start="14:00" data-end="16:30">
+                <div class="flex">
+                    <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1605649487212-47bdab064df7?auto=format&fit=crop&w=200&q=80');"></div>
+                    <div class="p-4 flex-1 flex flex-col justify-between">
+                        <div>
+                            <div class="flex justify-between items-start">
+                                <span class="bg-slate-100 text-slate-700 text-xs font-bold px-2 py-0.5 rounded">下午</span>
+                                <button onclick="updateMap('臺北霞海城隍廟')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
+                            </div>
+                            <h3 class="font-bold text-base text-slate-900 mt-1.5">大稻埕 / 迪化街散策 🏮</h3>
+                            <!-- 景點相關連結 -->
+                            <div class="flex flex-wrap gap-1.5 mt-2">
+                                <a href="https://www.swingtaiwan.com/dadaocheng" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 老街攻略</a>
+                            </div>
+                            <p class="text-sm text-slate-600 mt-1">參拜求緣極靈驗的城隍廟，逛復古老街，並在大稻埕老宅內享用質感茶飲【琅茶本舖】或【品 PIN THE SAVOR】。</p>
+                            <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
+                                <div>🕒 <b>時間：</b>城隍廟 07:00 - 19:00 / 茶飲依店家公告為準 (約 11:00/12:00 開始)</div>
+                                <div>🚇 <b>交通：</b>捷運善導寺站搭板南線至西門站，轉松山新店線至北門站，再步行 10 分鐘進入迪化街 (約 15 分鐘，核心區內全程步行)</div>
+                            </div>
                         </div>
                     </div>
                 </div>
+                <!-- 拜月老注意事項按鈕 -->
+                <div class="p-3 bg-slate-50 border-t border-slate-100">
+                    <button onclick="openMatchmakerModal()" class="w-full bg-pink-50 hover:bg-pink-100 text-pink-700 font-semibold text-xs md:text-sm py-2.5 px-3 rounded-lg border border-pink-200 transition flex items-center justify-center gap-2">
+                        <i class="fa-solid fa-heart text-pink-500"></i> 參拜霞海城隍廟月老注意事項指南
+                    </button>
+                </div>
             </div>
 
-            <!-- Card 4 -->
+            <!-- Card 4 (Cafe: 登波咖啡) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="16:30" data-end="18:30">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1507133750040-4a8f57021571?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -160,6 +179,10 @@
                             <button onclick="updateMap('登波咖啡')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">登波咖啡 & SNAPPP 相機 ☕</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/coffee_dumbo/" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">往赤峰街散步。在登波咖啡黃椅前拍美照吃肉桂捲，並到超潮相機店 SNAPPP 買台即可拍相機準備拍煙火。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>登波 11:00 - 19:00 / SNAPPP 14:00 - 21:00</div>
@@ -169,7 +192,7 @@
                 </div>
             </div>
 
-            <!-- Card 5 (Fireworks) -->
+            <!-- Card 5 (Fireworks) with Pop-up Trigger Button -->
             <div class="bg-indigo-950 text-white rounded-xl overflow-hidden shadow-lg border border-indigo-900 transition-all" data-start="18:30" data-end="20:00">
                 <div class="w-full h-44 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498931299472-f7a63a5a1cfa?q=80&w=1173&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');"></div>
                 <div class="p-4 md:p-5">
@@ -179,6 +202,14 @@
                     </div>
                     <h3 class="font-bold text-lg text-white">2026 大稻埕夏日節開幕煙火 🎆</h3>
                     <p class="text-sm text-indigo-100 mt-1">因應傍晚的煙火交管，晚餐請在迪化街周邊輕鬆吃在地小吃（如民樂旗魚米粉），務必於 18:30 前吃飽向碼頭移動，在河岸迎接最璀璨煙花。</p>
+                    
+                    <!-- 觀看攻略與交通封路彈跳視窗按鈕 -->
+                    <div class="mt-3">
+                        <button onclick="openFireworksModal()" class="w-full bg-amber-400 hover:bg-amber-300 text-slate-950 font-bold text-xs md:text-sm py-2.5 px-3 rounded-lg shadow transition flex items-center justify-center gap-2">
+                            <i class="fa-solid fa-circle-info"></i> 煙火最佳觀賞點 & 交通封路指南
+                        </button>
+                    </div>
+
                     <div class="text-xs text-indigo-200 mt-3 space-y-1 bg-indigo-900/40 p-2.5 rounded-lg border border-indigo-800">
                         <div>🕒 <b>時間：</b>煙火施放以官方為準 (通常為 20:00/20:30) / 小吃依各攤位為準</div>
                         <div>🚇 <b>交通：</b>小吃周邊步行即可；煙火結束後千萬不要嘗試叫車，請直接隨人潮步行回捷運北門站</div>
@@ -186,7 +217,7 @@
                 </div>
             </div>
 
-            <!-- Card 6 (Bar 1) - Updated to 澤山 -->
+            <!-- Card 6 (Bar 1: 澤山) -->
             <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -196,6 +227,10 @@
                             <button onclick="updateMap('澤山')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-white mt-1.5">澤山 🥂</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/zeshan_by_meth/?hl=en" target="_blank" class="bg-amber-900/40 hover:bg-amber-900/60 text-amber-300 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition border border-amber-500/30"><i class="fa-brands fa-instagram text-amber-400"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-300 mt-1">在大稻埕煙火散場後前往澤山品嚐精緻的特色調酒，享受微醺時光，完美避開第一波捷運散場人潮！</p>
                         <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
                             <div>🕒 <b>時間：</b>20:00 - 02:00</div>
@@ -228,16 +263,19 @@
                             <button onclick="updateMap('華山1914文化創意產業園區')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">華山 1914 文創園區 🌿</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.huashan1914.com/" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 官網</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">早晨的華山人潮最少，紅磚牆與斑駁的綠藤蔓超級殺底片、拍美照。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>園區戶外 24 小時開放</div>
-                            <div>🚇 <b>交通：</b>從台北車站搭捷運板南線至忠孝新生站，1 號出口步行 3 分鐘 (約 8 分鐘)</div>
+                            <div>🚇 <b>交通：</b>從台北車站搭捷運板南線至忠孝新生站， 1 號出口步行 3 分鐘 (約 8 分鐘)</div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <!-- Card 2 -->
+            <!-- Card 2 (Cafe: Aki Matcha Bar) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="11:30" data-end="13:30">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1536256263959-770b48d82b0a?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -247,6 +285,10 @@
                             <button onclick="updateMap('Aki Matcha Bar')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">Aki Matcha Bar 🍵</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/aki_matcha_bar/?hl=en" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">華山散步後前去品嚐極致濃郁的現刷日系抹茶與精緻抹系甜點，抹茶控天花板。★建議線上預約。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>11:00 - 18:00 (17:00 最後點餐)</div>
@@ -266,6 +308,9 @@
                             <button onclick="updateMap('UR LIVING 中山店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">中山區瘋狂血拼與拍貼 🛍️</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/ur_living_/?hl=en" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> UR LIVING IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">朝聖獨棟 UR LIVING，瘋逛 Laura 服飾、D+AF 網美鞋店、玉如阿姨。順便吃【灑白甜鮮奶麻糬】、【CREM】霜淇淋並逛【魷布院】。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>備註：</b>中山區下午貨最齊全。*買完可搭 1 站捷運回北車飯店放戰利品。*</div>
@@ -275,7 +320,7 @@
                 </div>
             </div>
 
-            <!-- Card 4 -->
+            <!-- Card 4 (Dinner: 青花驕) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="18:00" data-end="20:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1563245372-f21724e3856d?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -285,6 +330,11 @@
                             <button onclick="updateMap('青花驕麻辣鍋光復南店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">青花驕麻辣鍋 (光復南店) 🌶️</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                           
+                            <a href="https://inline.app/booking/-MaXEQcbiWaRjXyLytUu:inline-live-2/-MaXf5S05k_3QoMW32WL?language=zh-hk" target="_blank" class="bg-amber-50 hover:bg-amber-100 text-amber-800 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-calendar-check text-amber-600"></i> inline 預定</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">網美級別的精緻麻辣鍋物，香氣十足且擺盤具高級美感。★建議提前 inline 預約。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>11:30 - 01:00 (凌晨)</div>
@@ -294,7 +344,7 @@
                 </div>
             </div>
 
-            <!-- Card 5 (Bar 2) -->
+            <!-- Card 5 (Bar 2: 安慰劑) -->
             <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1574096079513-d8259312b785?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -304,6 +354,10 @@
                             <button onclick="updateMap('安慰劑 Placebo Taipei')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-white mt-1.5">安慰劑 Placebo 🏮</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/placebotaipei/?hl=en" target="_blank" class="bg-amber-900/40 hover:bg-amber-900/60 text-amber-300 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition border border-amber-500/30"><i class="fa-brands fa-instagram text-amber-400"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-300 mt-1">極具特色的中式復古風格客棧酒吧，大紅燈籠與木質裝潢極有氛圍，調酒大碗又好拍！★建議提前預約。</p>
                         <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
                             <div>🕒 <b>時間：</b>20:00 - 02:00 (週日有營業，喝完可搭信義線直達飯店)</div>
@@ -314,7 +368,7 @@
             </div>
         </div>
 
-        <!-- ==================== DAY 3 (Swapped Lion's Table & Qingjiao Collagen Noodle) ==================== -->
+        <!-- ==================== DAY 3 ==================== -->
         <div id="tab-3" class="day-content space-y-5" data-date="2026-08-17">
             <!-- Day Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
@@ -336,6 +390,9 @@
                             <button onclick="updateMap('國立臺灣科學教育館')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">【奇想世界：Anna & Daniel 特展】 🎨</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.klook.com/zh-HK/activity/209115-a-world-of-wonder-world-anna-daniel-exhibition" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 預約</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">位於科教館 7 樓，具備強烈視覺張力的現代網美視覺藝術特展，非常適合拍照。門票：$117。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>特展 10:00 - 18:00 (展期：6/19 － 9/28)</div>
@@ -345,7 +402,7 @@
                 </div>
             </div>
 
-            <!-- Card 2 (Swapped from lunch to dinner position earlier, now Lunch is Lion's Table) -->
+            <!-- Card 2 (Lunch: 獅子餐桌) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="12:00" data-end="14:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1544025162-d76694265947?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -355,6 +412,11 @@
                             <button onclick="updateMap('獅子餐桌 LIONS TABLE')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">獅子餐桌 LION'S TABLE 🦁</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://inline.app/booking/-O2clhMsFVhneQq3o8ca:inline-live-3/-O2clhZE6vdevSZi2WzP" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 預約</a>
+                            <a href="https://www.instagram.com/lionstabletw" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> Terra IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">店內裝潢充滿精緻的歐陸異國風情，私房法式料理極具美味浪漫。★建議提早致電或粉專預約。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>備註：</b>建議提前預約</div>
@@ -364,7 +426,7 @@
                 </div>
             </div>
 
-            <!-- Card 3 -->
+            <!-- Card 3 (Cafe: 三徑就荒 / Terra) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="14:00" data-end="18:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -374,6 +436,11 @@
                             <button onclick="updateMap('三徑就荒')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">民生社區質感品茗與散策 🌳</h3>
+                        <!-- 外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/iyoshicola_taiwan" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> 伊良可樂 台北中山 IG</a>
+                            <a href="https://www.instagram.com/terra_beantobar/?hl=en" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> Terra IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">台北最綠意盎然林蔭街道。外帶一杯【伊良可樂】，隨後進入【三徑就荒】（★建議官網預約）或【Terra Bean to Bar】品嚐頂級茶飲或巧克力。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>三徑就荒 12:00 - 20:00 / Terra 11:00 - 19:00</div>
@@ -383,7 +450,7 @@
                 </div>
             </div>
 
-            <!-- Card 4 (Swapped from lunch to dinner, now Dinner is Qingjiao Collagen Noodle) -->
+            <!-- Card 4 (Dinner: 青驕膠原麵館) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="18:00" data-end="20:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -393,6 +460,11 @@
                             <button onclick="updateMap('青驕膠原麵館')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">青驕膠原麵館 🍜</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://inline.app/booking/-OqsQ-y4WC0TZIUt7Deu:inline-live-4/-OqsQ05w3vI6pql6x19D" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 預約</a>
+                            
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">青花驕旗下全新個人麵食品牌，裝潢走摩登新時髦風，現場候位，一個人也能從容優雅享受極品麻辣麵。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>11:00 - 21:00</div>
@@ -402,7 +474,7 @@
                 </div>
             </div>
 
-            <!-- Card 5 (Bar 3) -->
+            <!-- Card 5 (Bar 3: tei by OBOND) -->
             <div class="bg-slate-950 text-amber-400 rounded-xl overflow-hidden shadow-lg border border-amber-500/20 flex transition-all" data-start="20:00" data-end="24:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0 opacity-90" style="background-image: url('https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -412,6 +484,11 @@
                             <button onclick="updateMap('tei by OBOND')" class="text-amber-400 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-white mt-1.5">[tei] by O'BOND 🍃</h3>
+                        <!-- 餐廳外部連結按鈕 -->
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/tei_by_obond/?hl=en" target="_blank" class="bg-amber-900/40 hover:bg-amber-900/60 text-amber-300 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition border border-amber-500/30"><i class="fa-brands fa-instagram text-amber-400"></i> IG</a>
+                            
+                        </div>
                         <p class="text-sm text-slate-300 mt-1">極隱密的東方美學茶酒吧。空間視覺感非常震撼，融入頂級茶香。★建議提前 inline 預約。</p>
                         <div class="text-xs text-amber-400/80 mt-3 space-y-1 bg-amber-950/40 p-2 rounded-lg border border-amber-500/10">
                             <div>🕒 <b>時間：</b>20:00 – 02:00 (週一有開)</div>
@@ -434,7 +511,7 @@
                 </div>
             </div>
 
-            <!-- Card 1 -->
+            <!-- Card 1 (Lunch: 天天利美食坊) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="10:30" data-end="12:00">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1627308595229-7830a5c91f9f?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -444,6 +521,7 @@
                             <button onclick="updateMap('天天利美食坊')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">天天利美食坊 🍳</h3>
+                        <!-- 餐廳外部連結按鈕 (無官網IG則不加) -->
                         <p class="text-sm text-slate-600 mt-1">飯店辦理退房並將大件行李寄放在櫃檯。11:00 提早進西門町享用招牌邪惡半熟蛋滷肉飯，完美避開人潮。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>11:00 - 22:30 (週二有營業)</div>
@@ -453,7 +531,7 @@
                 </div>
             </div>
 
-            <!-- Card 2 -->
+            <!-- Card 2 (承繼) -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 overflow-hidden flex transition-all" data-start="12:00" data-end="13:30">
                 <div class="w-32 bg-cover bg-center flex-shrink-0" style="background-image: url('https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=200&q=80');"></div>
                 <div class="p-4 flex-1 flex flex-col justify-between">
@@ -463,7 +541,11 @@
                             <button onclick="updateMap('承繼 CHENG JI')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">【承繼】提取經典手信 🥐</h3>
-                        <p class="text-sm text-slate-600 mt-1">中午 12:00 一開門精準提取網美肉桂捲/千層，省時又省力。★強烈建議出發前先在官網預訂，這樣最後一天就不用提著手信四處走了。</p>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.cheng-ji.com/" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 官網預訂</a>
+                            <a href="https://www.instagram.com/chengjitw" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
+                        <p class="text-sm text-slate-600 mt-1">中午 12:00 一開門精準提取網美肉桂捲/千層，省時又省力。★強烈建議出發前先在官網預訂。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>12:00 開始營業</div>
                             <div>🚇 <b>交通：</b>從捷運西門站搭松山新店線至南京復興站，轉文湖線至中山國中站，出站步行 5 分鐘 (約 15 分鐘)</div>
@@ -482,6 +564,9 @@
                             <button onclick="updateMap('松山文創園區')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">松山文創園區 🏛️</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.songshanculturalpark.org" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 官網</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">買完承繼後，立刻搭捷運回台北車站把手信放到飯店寄存。再次保持兩手空空前往松菸，在巴洛克花園拍優雅告別街拍美照與最後巡禮。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>園區室內展館 09:00 - 18:00 (台北凱撒大飯店寄物)</div>
@@ -533,6 +618,10 @@
                             <button onclick="updateMap('承繼 CHENG JI')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">1. 承繼 CHENG JI 🥐</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.cheng-ji.com/" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 官網</a>
+                            <a href="https://www.instagram.com/chengjitw" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">台北話題爆棚的肉桂捲、法式千層與 -18°C 焦糖起司蛋糕，質感外盒極適合作為伴手禮。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>💡 <b>推薦品項：</b>肉桂阿曼、-18°C 焦糖起司蛋糕</div>
@@ -590,6 +679,9 @@
                             <button onclick="updateMap('WHOSMiNG')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">4. WHOSMiNG 咖啡豆 / 質感周邊 🎨</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.instagram.com/whosming/" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">人氣插畫家 MiNG 的咖啡品牌與選物，極受香港文青與咖啡迷喜愛，手繪咖啡杯圖案與精選配方豆質感滿分。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>💡 <b>推薦品項：</b>聯名咖啡掛耳包、手繪風咖啡杯、文創周邊</div>
@@ -609,6 +701,10 @@
                             <button onclick="updateMap('But. we love butter')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">5. But. we love butter 🧈</h3>
+                        <div class="flex flex-wrap gap-1.5 mt-2">
+                            <a href="https://www.but.com.tw/" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 官網</a>
+                            <a href="https://www.instagram.com/but.we.love.butter/?hl=en" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
+                        </div>
                         <p class="text-sm text-slate-600 mt-1">台北最具話題的奶油餅乾名店！不只店面像極美式復古藝廊，厚夾餅乾（如濃醬奶油餅乾）更是香氣濃郁、包裝潮到出水。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>💡 <b>推薦品項：</b>濃厚奶油餅乾禮盒（生乳酪蜂蜜/鹹蛋黃核桃）</div>
@@ -620,6 +716,129 @@
         </div>
 
     </main>
+
+    <!-- ==================== 拜月老注意事項彈跳視窗 (MODAL) ==================== -->
+    <div id="matchmaker-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col animate-in fade-in duration-200">
+            <!-- Modal Header -->
+            <div class="bg-slate-900 text-white p-4 sticky top-0 z-10 flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-heart text-pink-400"></i>
+                    <h3 class="font-bold text-base md:text-lg">台北霞海城隍廟・月老參拜注意事項</h3>
+                </div>
+                <button onclick="closeMatchmakerModal()" class="text-slate-400 hover:text-white text-xl p-1 font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body Content -->
+            <div class="p-5 space-y-4 text-slate-700 text-sm">
+                <!-- Section 1: Preparation / Offerings -->
+                <div class="bg-pink-50/60 p-4 rounded-xl border border-pink-200/60">
+                    <h4 class="font-bold text-pink-900 text-base mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-basket-shopping text-pink-500"></i> 參拜供品準備
+                    </h4>
+                    <ul class="space-y-2.5 text-xs md:text-sm text-slate-700">
+                        <li><b>1. 金紙與香柱：</b>於廟內櫃檯購買金紙與香（有專人指引）。</li>
+                        <li><b>2. 結緣鉛錢、紅線：</b>購買金紙會附贈，需隨金紙一同在神明爐過香。</li>
+                        <li><b>3. 甜食普品：</b>可準備喜餅、巧克力或軟糖（代表甜甜蜜蜜），切記不要拜酸或苦的食物。</li>
+                    </ul>
+                </div>
+
+                <!-- Section 2: Steps -->
+                <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-200/60">
+                    <h4 class="font-bold text-amber-900 text-base mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-list-check text-amber-500"></i> 標準參拜流程
+                    </h4>
+                    <ul class="space-y-2.5 text-xs md:text-sm text-slate-700">
+                        <li><b>1. 點香與參拜順序：</b>點燃三柱香，先向天公爐（外天公爐）拜拜，接著向正殿城隍爺、月老及諸神參拜。</li>
+                        <li><b>2. 誠心向月老報資料：</b>向月老清楚報上自己的<b>姓名、農曆/國曆生辰、居住地址</b>，以及心中理想對象的條件（如個性、價值觀，越具體越好）。</li>
+                        <li><b>3. 插香：</b>參拜完後，將三柱香分別插在指定香爐中。</li>
+                    </ul>
+                </div>
+
+                <!-- Section 3: Red String & Taboos -->
+                <div class="bg-red-50/60 p-4 rounded-xl border border-red-200/60">
+                    <h4 class="font-bold text-red-900 text-base mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation text-red-500"></i> 紅線收納與禁忌提醒
+                    </h4>
+                    <ul class="space-y-2.5 text-xs md:text-sm text-slate-700">
+                        <li><b>🔴 紅線與鉛錢用法：</b>參拜後將紅線與鉛錢放進隨身包包或皮夾內隨身攜帶，千萬<b>不要</b>拿出來綁在手上（容易弄丟或斷掉）。</li>
+                        <li><b>🌂 參拜禁忌：</b>拜拜時傘絕不能放在供桌上（諧音「散」），最好收好放地或包包。</li>
+                        <li><b>🙏 心誠則靈：</b>切忌貪心，若有好消息（或是日後覓得良緣），記得帶喜餅回來還願感謝月老！</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-50 p-4 border-t border-slate-100 text-right">
+                <button onclick="closeMatchmakerModal()" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs md:text-sm px-5 py-2 rounded-lg transition">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- ==================== 煙火攻略彈跳視窗 (MODAL) ==================== -->
+    <div id="fireworks-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-lg max-h-[85vh] overflow-y-auto shadow-2xl border border-slate-100 flex flex-col animate-in fade-in duration-200">
+            <!-- Modal Header -->
+            <div class="bg-slate-900 text-white p-4 sticky top-0 z-10 flex justify-between items-center border-b border-slate-800">
+                <div class="flex items-center gap-2">
+                    <i class="fa-solid fa-fireworks text-amber-400"></i>
+                    <h3 class="font-bold text-base md:text-lg">大稻埕煙火觀賞攻略 & 交通管制指南</h3>
+                </div>
+                <button onclick="closeFireworksModal()" class="text-slate-400 hover:text-white text-xl p-1 font-bold">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            
+            <!-- Modal Body Content -->
+            <div class="p-5 space-y-4 text-slate-700 text-sm">
+                <!-- Section 1: Best Spots -->
+                <div class="bg-amber-50/60 p-4 rounded-xl border border-amber-200/60">
+                    <h4 class="font-bold text-amber-900 text-base mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-star text-amber-500"></i> 絕佳觀賞位置推薦
+                    </h4>
+                    <ul class="space-y-2.5 text-xs md:text-sm text-slate-700">
+                        <li><b>1. 大稻埕碼頭水門內 / 5號水門廣場：</b>正對施放點，臨場感震撼，但人潮最多，建議 18:30 前佔好位置。</li>
+                        <li><b>2. 延平河濱公園（淡水河畔）：</b>延伸至南北側綠地，視野開闊，可避開最擁擠的核心區。</li>
+                        <li><b>3. 三重忠孝碼頭（對岸）：</b>隔著淡水河相望，視野極佳且人潮比本島少很多，拍攝全景倒影非常合適。</li>
+                        <li><b>4. 台北橋人行道：</b>可俯瞰河面與煙火，但橋面空間有限，需留意警察會驅趕逗留拍照的人潮。</li>
+                    </ul>
+                </div>
+
+                <!-- Section 2: Traffic Control -->
+                <div class="bg-red-50/60 p-4 rounded-xl border border-red-200/60">
+                    <h4 class="font-bold text-red-900 text-base mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-triangle-exclamation text-red-500"></i> 交通管制與封路措施 (Traffic Control)
+                    </h4>
+                    <ul class="space-y-2.5 text-xs md:text-sm text-slate-700">
+                        <li><b>⛔ 水門及堤外道路管制：</b>活動當天傍晚（通常 17:00 或 18:00 起）水門會禁止車輛（含機車、自行車）進出，堤外環河北路段也常配合實施車輛管制。</li>
+                        <li><b>⛔ 周邊平面道路交管：</b>環河北路、民生西路、延平北路一帶會視人潮擴大實施彈性交管，禁止車輛駛入核心管制區。</li>
+                        <li><b>🚲 YouBike 暫停營運：</b>煙火周邊的 YouBike 借還車站點通常會自傍晚起暫停營運，無法借還車。</li>
+                    </ul>
+                </div>
+
+                <!-- Section 3: Smart Travel Tips -->
+                <div class="bg-slate-100 p-4 rounded-xl border border-slate-200">
+                    <h4 class="font-bold text-slate-900 text-base mb-2 flex items-center gap-1.5">
+                        <i class="fa-solid fa-lightbulb text-indigo-600"></i> 避開人潮聰明撤退法
+                    </h4>
+                    <p class="text-xs md:text-sm leading-relaxed text-slate-600">
+                        煙火結束後千萬<b>不要</b>嘗試在管制區叫計程車或擠進最近的出口。建議跟隨人潮往東步行約 10-15 分鐘至<b>捷運北門站</b>或<b>雙連站</b>搭乘，或者按照本行程安排，散場後先去附近的【澤山】Bar 喝一杯，等 21:30 過後人潮散去再從容回飯店！
+                    </p>
+                </div>
+            </div>
+
+            <!-- Modal Footer -->
+            <div class="bg-slate-50 p-4 border-t border-slate-100 text-right">
+                <button onclick="closeFireworksModal()" class="bg-slate-900 hover:bg-slate-800 text-white font-semibold text-xs md:text-sm px-5 py-2 rounded-lg transition">
+                    我知道了
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- Bottom Notification Bar -->
     <div id="status-bar" class="fixed bottom-0 left-0 right-0 bg-slate-900 text-white px-4 py-3.5 text-xs md:text-sm flex justify-between items-center shadow-2xl border-t border-slate-800 z-50 max-w-md mx-auto md:max-w-2xl">
@@ -657,8 +876,26 @@
             const activeBtn = document.getElementById('btn-' + tabId);
             if(activeBtn) {
                 activeBtn.classList.add('active');
-                activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+                if(!activeBtn.id.includes('souvenir')) {
+                    activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
+                }
             }
+        }
+
+        function openMatchmakerModal() {
+            document.getElementById('matchmaker-modal').classList.add('active');
+        }
+
+        function closeMatchmakerModal() {
+            document.getElementById('matchmaker-modal').classList.remove('active');
+        }
+
+        function openFireworksModal() {
+            document.getElementById('fireworks-modal').classList.add('active');
+        }
+
+        function closeFireworksModal() {
+            document.getElementById('fireworks-modal').classList.remove('active');
         }
 
         function checkCurrentItinerarySlot() {
