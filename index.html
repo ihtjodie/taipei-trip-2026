@@ -70,7 +70,7 @@
             <button onclick="switchTab('souvenir')" id="btn-souvenir" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 whitespace-nowrap">
                 🎁 手信<br><span class="text-xs font-normal opacity-80">Souvenirs</span>
             </button>
-            <!-- 新增：Checklist Tab 按鈕 -->
+            <!-- Checklist Tab 按鈕 -->
             <button onclick="switchTab('checklist')" id="btn-checklist" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-emerald-700 bg-emerald-50/50 hover:bg-emerald-100/50 whitespace-nowrap">
                 🧳 行李<br><span class="text-xs font-normal opacity-80">Checklist</span>
             </button>
@@ -691,7 +691,7 @@
             </div>
         </div>
 
-        <!-- ==================== CHECKLIST TAB (新增) ==================== -->
+        <!-- ==================== CHECKLIST TAB ==================== -->
         <div id="tab-checklist" class="day-content space-y-5">
             <!-- Checklist Banner -->
             <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
@@ -703,11 +703,19 @@
                 </div>
             </div>
 
-            <!-- 進度條 Card -->
+            <!-- 進度條 Card（含一鍵全選 / 取消全選總控制按鈕） -->
             <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-xs font-bold text-slate-700">打包進度</span>
-                    <span id="checklist-progress-text" class="text-xs font-bold text-emerald-600">0%</span>
+                    <div class="flex items-center gap-2">
+                        <button onclick="toggleAllChecklist(true)" class="text-[11px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-2 py-0.5 rounded border border-emerald-200 transition flex items-center gap-1">
+                            <i class="fa-solid fa-check-double text-emerald-500"></i> 全選
+                        </button>
+                        <button onclick="toggleAllChecklist(false)" class="text-[11px] font-semibold text-slate-600 bg-slate-100 hover:bg-slate-200 px-2 py-0.5 rounded border border-slate-200 transition flex items-center gap-1">
+                            <i class="fa-solid fa-xmark text-slate-400"></i> 取消全選
+                        </button>
+                        <span id="checklist-progress-text" class="text-xs font-bold text-emerald-600 ml-1">0%</span>
+                    </div>
                 </div>
                 <div class="w-full bg-slate-100 rounded-full h-2.5">
                     <div id="checklist-progress-bar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
@@ -716,9 +724,15 @@
 
             <!-- 1. 重要文件與財物 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
-                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <i class="fa-solid fa-passport text-indigo-600"></i> 1. 重要文件與財物
-                </h3>
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-passport text-indigo-600"></i> 1. 重要文件與財物
+                    </h3>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleSectionChecklist(this, true)" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-1.5 py-0.5 rounded transition">全選</button>
+                        <button onclick="toggleSectionChecklist(this, false)" class="text-[10px] font-semibold text-slate-500 bg-slate-100 hover:bg-slate-200 px-1.5 py-0.5 rounded transition">取消</button>
+                    </div>
+                </div>
                 <div class="space-y-2 text-xs md:text-sm text-slate-700">
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
@@ -745,9 +759,15 @@
 
             <!-- 2. 電子產品 & 打卡裝備 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
-                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <i class="fa-solid fa-mobile-screen text-indigo-600"></i> 2. 電子產品 & 打卡裝備
-                </h3>
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-mobile-screen text-indigo-600"></i> 2. 電子產品 & 打卡裝備
+                    </h3>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleSectionChecklist(this, true)" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-1.5 py-0.5 rounded transition">全選</button>
+                        <button onclick="toggleSectionChecklist(this, false)" class="text-[10px] font-semibold text-slate-500 bg-slate-100 hover:bg-slate-200 px-1.5 py-0.5 rounded transition">取消</button>
+                    </div>
+                </div>
                 <div class="space-y-2 text-xs md:text-sm text-slate-700">
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
@@ -779,15 +799,22 @@
                     </label>
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
-                        <span>拖板</span>    
+                        <span>拖板</span>
+                    </label>
                 </div>
             </div>
 
             <!-- 3. 美妝護膚 & 髮型用品 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
-                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i> 3. 美妝護膚 & 髮型用品
-                </h3>
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i> 3. 美妝護膚 & 髮型用品
+                    </h3>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleSectionChecklist(this, true)" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-1.5 py-0.5 rounded transition">全選</button>
+                        <button onclick="toggleSectionChecklist(this, false)" class="text-[10px] font-semibold text-slate-500 bg-slate-100 hover:bg-slate-200 px-1.5 py-0.5 rounded transition">取消</button>
+                    </div>
+                </div>
                 <div class="space-y-2 text-xs md:text-sm text-slate-700">
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
@@ -820,14 +847,21 @@
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
                         <span>袋仔裝住沖涼嘅嘢</span>
+                    </label>
                 </div>
             </div>
 
             <!-- 4. OOTD 穿搭 & 配件 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
-                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <i class="fa-solid fa-shirt text-indigo-600"></i> 4. OOTD 穿搭 & 配件
-                </h3>
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-shirt text-indigo-600"></i> 4. OOTD 穿搭 & 配件
+                    </h3>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleSectionChecklist(this, true)" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-1.5 py-0.5 rounded transition">全選</button>
+                        <button onclick="toggleSectionChecklist(this, false)" class="text-[10px] font-semibold text-slate-500 bg-slate-100 hover:bg-slate-200 px-1.5 py-0.5 rounded transition">取消</button>
+                    </div>
+                </div>
                 <div class="space-y-2 text-xs md:text-sm text-slate-700">
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
@@ -852,14 +886,21 @@
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
                         <span>襪子</span>
+                    </label>
                 </div>
             </div>
 
             <!-- 5. 隨身小物 & 藥物 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
-                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <i class="fa-solid fa-kit-medical text-indigo-600"></i> 5. 隨身小物 & 藥物
-                </h3>
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-kit-medical text-indigo-600"></i> 5. 隨身小物 & 藥物
+                    </h3>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleSectionChecklist(this, true)" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-1.5 py-0.5 rounded transition">全選</button>
+                        <button onclick="toggleSectionChecklist(this, false)" class="text-[10px] font-semibold text-slate-500 bg-slate-100 hover:bg-slate-200 px-1.5 py-0.5 rounded transition">取消</button>
+                    </div>
+                </div>
                 <div class="space-y-2 text-xs md:text-sm text-slate-700">
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
@@ -882,9 +923,15 @@
 
             <!-- 6. 爆買預備組 -->
             <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
-                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
-                    <i class="fa-solid fa-bag-shopping text-indigo-600"></i> 6. 爆買預備組
-                </h3>
+                <div class="flex justify-between items-center border-b border-slate-100 pb-2">
+                    <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-indigo-600"></i> 6. 爆買預備組
+                    </h3>
+                    <div class="flex items-center gap-1.5">
+                        <button onclick="toggleSectionChecklist(this, true)" class="text-[10px] font-semibold text-emerald-700 bg-emerald-50 hover:bg-emerald-100 px-1.5 py-0.5 rounded transition">全選</button>
+                        <button onclick="toggleSectionChecklist(this, false)" class="text-[10px] font-semibold text-slate-500 bg-slate-100 hover:bg-slate-200 px-1.5 py-0.5 rounded transition">取消</button>
+                    </div>
+                </div>
                 <div class="space-y-2 text-xs md:text-sm text-slate-700">
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
@@ -893,13 +940,14 @@
                     <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
                         <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
                         <span>手提折疊行李袋</span>
+                    </label>
                 </div>
             </div>
         </div>
 
     </main>
 
-    <!-- Google Map View Area[cite: 1] -->
+    <!-- Google Map View Area -->
     <section class="max-w-md mx-auto mt-8 mb-8 px-4 md:max-w-2xl">
         <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100">
             <div class="bg-slate-900 px-4 py-3 text-sm font-bold text-white flex justify-between items-center">
@@ -1038,6 +1086,24 @@
         </div>
     </div>
 
+    <!-- ==================== Checklist 完成慶祝彈跳視窗 (MODAL) ==================== -->
+    <div id="checklist-complete-modal" class="modal fixed inset-0 bg-black/70 backdrop-blur-sm z-[100] items-center justify-center p-4">
+        <div class="bg-white rounded-2xl w-full max-w-sm p-6 text-center shadow-2xl border border-slate-100 space-y-4 animate-in zoom-in-95 duration-200">
+            <div class="w-16 h-16 bg-emerald-100 text-emerald-500 rounded-full flex items-center justify-center mx-auto text-3xl shadow-inner">
+                <i class="fa-solid fa-plane-departure"></i>
+            </div>
+            <div>
+                <h3 class="font-black text-xl text-slate-900">行李準備完成！🎉</h3>
+                <p class="text-xs md:text-sm text-slate-500 mt-2 leading-relaxed">
+                    好嘢！行李已經全部收拾妥當～<br>準備好出發去台北玩啦！✨✈️
+                </p>
+            </div>
+            <button onclick="closeChecklistCompleteModal()" class="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold text-sm py-2.5 rounded-xl transition shadow-md shadow-emerald-200">
+                出發！Go Go Go！✈️
+            </button>
+        </div>
+    </div>
+
     <!-- Core Javascript Functions -->
     <script>
         function updateMap(locationName) {
@@ -1089,6 +1155,10 @@
             document.getElementById('fireworks-modal').classList.remove('active');
         }
 
+        function closeChecklistCompleteModal() {
+            document.getElementById('checklist-complete-modal').classList.remove('active');
+        }
+
         function checkCurrentItinerarySlot() {
             const now = new Date();
             const yyyy = now.getFullYear();
@@ -1135,7 +1205,7 @@
             }
         }
 
-        // Checklist 進度條動態計算
+        // Checklist 進度條動態計算 & 100% 彈窗觸發
         function updateChecklistProgress() {
             const checkboxes = document.querySelectorAll('#tab-checklist input[type="checkbox"]');
             const total = checkboxes.length;
@@ -1146,6 +1216,34 @@
             const percent = Math.round((checkedCount / total) * 100);
             document.getElementById('checklist-progress-bar').style.width = percent + '%';
             document.getElementById('checklist-progress-text').innerText = percent + '%';
+
+            // 達到 100% 時觸發慶祝 Modal
+            if (percent === 100) {
+                setTimeout(() => {
+                    document.getElementById('checklist-complete-modal').classList.add('active');
+                }, 200);
+            }
+        }
+
+        // 全局：一鍵全選 / 取消全選
+        function toggleAllChecklist(selectState) {
+            const checkboxes = document.querySelectorAll('#tab-checklist input[type="checkbox"]');
+            checkboxes.forEach(cb => {
+                cb.checked = selectState;
+            });
+            updateChecklistProgress();
+        }
+
+        // 新增：個別 Section 一鍵全選 / 取消全選
+        function toggleSectionChecklist(buttonEl, selectState) {
+            const sectionCard = buttonEl.closest('.bg-white');
+            if (sectionCard) {
+                const checkboxes = sectionCard.querySelectorAll('input[type="checkbox"]');
+                checkboxes.forEach(cb => {
+                    cb.checked = selectState;
+                });
+                updateChecklistProgress();
+            }
         }
 
         checkCurrentItinerarySlot();
