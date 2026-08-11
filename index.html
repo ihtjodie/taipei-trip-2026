@@ -18,6 +18,11 @@
         }
         .modal { display: none; }
         .modal.active { display: flex; }
+        /* Checklist 完成樣式 */
+        .checklist-item input:checked + span {
+            text-decoration: line-through;
+            color: #94a3b8;
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans antialiased pb-10">
@@ -64,6 +69,10 @@
             </button>
             <button onclick="switchTab('souvenir')" id="btn-souvenir" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-amber-700 bg-amber-50/50 hover:bg-amber-100/50 whitespace-nowrap">
                 🎁 手信<br><span class="text-xs font-normal opacity-80">Souvenirs</span>
+            </button>
+            <!-- 新增：Checklist Tab 按鈕 -->
+            <button onclick="switchTab('checklist')" id="btn-checklist" class="tab-btn flex-1 py-2.5 px-1 text-center text-xs md:text-sm font-bold rounded-lg border border-transparent transition-all text-emerald-700 bg-emerald-50/50 hover:bg-emerald-100/50 whitespace-nowrap">
+                🧳 行李<br><span class="text-xs font-normal opacity-80">Checklist</span>
             </button>
         </div>
 
@@ -163,7 +172,7 @@
                         <div class="flex flex-wrap gap-1.5 mt-2">
                             <a href="https://www.instagram.com/coffee_dumbo/" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
                         </div>
-                        <p class="text-sm text-slate-600 mt-1">往赤峰街散步。在登波咖啡黃椅前拍美照吃肉桂捲，並到超潮相機店 SNAPPP 買台即可拍相機準備拍煙火。</p>
+                        <p class="text-sm text-slate-600 mt-1">往赤峰街散步。喺登波咖啡黃椅前拍美照吃肉桂捲，並到超潮相機店 SNAPPP 買台即可拍相機準備拍煙火。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>登波 11:00 - 19:00 / SNAPPP 14:00 - 21:00</div>
                             <div>🚇 <b>交通：</b>從迪化街步行往赤峰街方向移動約 12 - 15 分鐘</div>
@@ -512,7 +521,7 @@
                             <a href="https://www.cheng-ji.com/" target="_blank" class="bg-slate-100 hover:bg-slate-200 text-slate-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-solid fa-globe text-indigo-600"></i> 官網預訂</a>
                             <a href="https://www.instagram.com/chengjitw" target="_blank" class="bg-pink-50 hover:bg-pink-100 text-pink-700 text-[11px] font-semibold px-2 py-1 rounded-md flex items-center gap-1 transition"><i class="fa-brands fa-instagram text-pink-500"></i> IG</a>
                         </div>
-                        <p class="text-sm text-slate-600 mt-1">中午 12:00 一開門精準提取網美肉桂捲/千層，省時又省力。★強烈建議出發前先在官網預訂。</p>
+                        <p class="text-sm text-slate-600 mt-1">中午 12:00 一開門精準提取網美肉桂捲/千層，省時又省力。★強烈建議出發前先喺官網預訂。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>🕒 <b>時間：</b>12:00 開始營業</div>
                             <div>🚇 <b>交通：</b>從捷運西門站搭松山新店線至南京復興站，轉文湖線至中山國中站，出站步行 5 分鐘 (約 15 分鐘)</div>
@@ -608,7 +617,7 @@
                             <button onclick="updateMap('魷布院 中山店')" class="text-indigo-600 text-sm flex items-center gap-0.5 font-semibold"><i class="fa-solid fa-location-dot"></i>地圖</button>
                         </div>
                         <h3 class="font-bold text-base text-slate-900 mt-1.5">2. 魷布院 🦑</h3>
-                        <p class="text-sm text-slate-600 mt-1">近期在中山區極具話題、深受旅客喜愛的質感魷魚製品與特色伴手禮專賣店。</p>
+                        <p class="text-sm text-slate-600 mt-1">近期喺中山區極具話題、深受旅客喜愛的質感魷魚製品與特色伴手禮專賣店。</p>
                         <div class="text-xs text-slate-500 mt-3 space-y-1 bg-slate-50 p-2 rounded-lg">
                             <div>💡 <b>推薦品項：</b>各式風味魷魚乾、碳烤魷魚片</div>
                             <div>📌 <b>備註：</b>Day 2 中山區血拼時可順路前往選購。</div>
@@ -682,9 +691,215 @@
             </div>
         </div>
 
+        <!-- ==================== CHECKLIST TAB (新增) ==================== -->
+        <div id="tab-checklist" class="day-content space-y-5">
+            <!-- Checklist Banner -->
+            <div class="relative rounded-2xl overflow-hidden h-24 shadow-sm">
+                <div class="absolute inset-0 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1581553680321-4fffae59febd?auto=format&fit=crop&w=600&q=80');"></div>
+                <div class="absolute inset-0 bg-gradient-to-r from-emerald-950/90 via-emerald-900/70 to-transparent"></div>
+                <div class="absolute inset-0 p-5 flex flex-col justify-center text-white">
+                    <span class="text-xs font-bold tracking-widest text-emerald-300 uppercase">00's Girl Packing List</span>
+                    <h2 class="text-base font-bold md:text-lg">台北旅行執行李 Checklist 🧳</h2>
+                </div>
+            </div>
+
+            <!-- 進度條 Card -->
+            <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-xs font-bold text-slate-700">打包進度</span>
+                    <span id="checklist-progress-text" class="text-xs font-bold text-emerald-600">0%</span>
+                </div>
+                <div class="w-full bg-slate-100 rounded-full h-2.5">
+                    <div id="checklist-progress-bar" class="bg-emerald-500 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <!-- 1. 重要文件與財物 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-passport text-indigo-600"></i> 1. 重要文件與財物
+                </h3>
+                <div class="space-y-2 text-xs md:text-sm text-slate-700">
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>護照（有效期 6 個月以上）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>入台證（已印好）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>香港身分證</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>台幣現金 & 信用卡</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>悠遊卡</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 2. 電子產品 & 打卡裝備 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-mobile-screen text-indigo-600"></i> 2. 電子產品 & 打卡裝備
+                </h3>
+                <div class="space-y-2 text-xs md:text-sm text-slate-700">
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>手機 & 充電線</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>尿袋（100Wh 或以下，<b>不可用無線充電</b>）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>台灣轉接頭（兩腳扁插 110V）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>eSIM / 實體 SIM 卡</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>菲林相機 / 相機</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>耳機</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>E-reader</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>拖板</span>    
+                </div>
+            </div>
+
+            <!-- 3. 美妝護膚 & 髮型用品 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-wand-magic-sparkles text-indigo-600"></i> 3. 美妝護膚 & 髮型用品
+                </h3>
+                <div class="space-y-2 text-xs md:text-sm text-slate-700">
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>彩妝 & 護膚品（防曬、卸妝、面膜）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>美瞳 / 隱形眼鏡 & 護理液</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>直髮夾 / 捲髮棒（注意：需支援 110V 雙電壓）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>香水分裝瓶</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>個人洗沐用品旅行裝</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>一次性洗面巾</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>牙刷、牙膏</span>
+                    </label> 
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>袋仔裝住沖涼嘅嘢</span>
+                </div>
+            </div>
+
+            <!-- 4. OOTD 穿搭 & 配件 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-shirt text-indigo-600"></i> 4. OOTD 穿搭 & 配件
+                </h3>
+                <div class="space-y-2 text-xs md:text-sm text-slate-700">
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>打卡穿搭 OOTD 3-4 套</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>超舒服波鞋 / 行街鞋</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>薄外套 / 防曬衫</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>內衣褲 & 睡衣</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>飾物 / 墨鏡 / 帽子</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>襪子</span>
+                </div>
+            </div>
+
+            <!-- 5. 隨身小物 & 藥物 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-kit-medical text-indigo-600"></i> 5. 隨身小物 & 藥物
+                </h3>
+                <div class="space-y-2 text-xs md:text-sm text-slate-700">
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>紙巾 & 濕紙巾</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>傘</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>常備藥物（止痛藥、腸胃藥、暈車藥、蚊怕水）</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>M巾</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- 6. 爆買預備組 -->
+            <div class="bg-white rounded-xl shadow-sm border border-slate-100 p-4 space-y-3">
+                <h3 class="font-bold text-sm text-slate-900 flex items-center gap-2 border-b border-slate-100 pb-2">
+                    <i class="fa-solid fa-bag-shopping text-indigo-600"></i> 6. 爆買預備組
+                </h3>
+                <div class="space-y-2 text-xs md:text-sm text-slate-700">
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>環保袋</span>
+                    </label>
+                    <label class="checklist-item flex items-start gap-2.5 cursor-pointer">
+                        <input type="checkbox" onchange="updateChecklistProgress()" class="mt-0.5 rounded border-slate-300 text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                        <span>手提折疊行李袋</span>
+                </div>
+            </div>
+        </div>
+
     </main>
 
-    <!-- Google Map View Area (Moved to Bottom)[cite: 1] -->
+    <!-- Google Map View Area[cite: 1] -->
     <section class="max-w-md mx-auto mt-8 mb-8 px-4 md:max-w-2xl">
         <div class="bg-white rounded-2xl shadow-md overflow-hidden border border-slate-100">
             <div class="bg-slate-900 px-4 py-3 text-sm font-bold text-white flex justify-between items-center">
@@ -839,7 +1054,7 @@
             document.querySelectorAll('.day-content').forEach(content => content.classList.remove('active'));
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.remove('active');
-                if(!btn.id.includes('souvenir')) {
+                if(!btn.id.includes('souvenir') && !btn.id.includes('checklist')) {
                     btn.classList.add('text-slate-600', 'hover:bg-slate-50');
                 }
             });
@@ -852,7 +1067,7 @@
             const activeBtn = document.getElementById('btn-' + tabId);
             if(activeBtn) {
                 activeBtn.classList.add('active');
-                if(!activeBtn.id.includes('souvenir')) {
+                if(!activeBtn.id.includes('souvenir') && !activeBtn.id.includes('checklist')) {
                     activeBtn.classList.remove('text-slate-600', 'hover:bg-slate-50');
                 }
             }
@@ -918,6 +1133,19 @@
             } else {
                 alert("未開始你嘅Trip喔 (●'◡'●)");
             }
+        }
+
+        // Checklist 進度條動態計算
+        function updateChecklistProgress() {
+            const checkboxes = document.querySelectorAll('#tab-checklist input[type="checkbox"]');
+            const total = checkboxes.length;
+            let checkedCount = 0;
+            checkboxes.forEach(cb => {
+                if(cb.checked) checkedCount++;
+            });
+            const percent = Math.round((checkedCount / total) * 100);
+            document.getElementById('checklist-progress-bar').style.width = percent + '%';
+            document.getElementById('checklist-progress-text').innerText = percent + '%';
         }
 
         checkCurrentItinerarySlot();
